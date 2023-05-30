@@ -1,0 +1,7 @@
+{
+  "name": "MediMinderApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
