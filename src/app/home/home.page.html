@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-menu contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+<div class="ion-page" id="main-content">
+  <ion-header mode="md">
+    <ion-toolbar color="primary" style="margin-top: 0; background-color: transparent;">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button> 
+      </ion-buttons>
+      <ion-title>MediMinder</ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <mat-icon slot="icon-only">account_circle</mat-icon>
+        </ion-button>
+        <ion-button class="favorite-icon">
+          <mat-icon slot="icon-only" name="favorite-icon">favorite</mat-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+
+  </ion-content>
+</div>

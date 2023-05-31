@@ -1,0 +1,168 @@
+<div class="ion-page" id="main-content">
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-content>
+        <!-- Input Usuario -->
+        <ion-list>
+          <form #myForm="ngForm">
+            <ion-card-header class="ion-text-center">
+              <ion-title class="titulo-login">Formulario Registro</ion-title>
+            </ion-card-header>
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  class="usuario"
+                  name="nombreUsuario"
+                  type="text"
+                  fill="outline"
+                  label="Nombre de Usuario"
+                  label-placement="floating"
+                  pattern="[a-zA-Z0-9]+"
+                  minlength="3"
+                  maxlength="8"
+                  placeholder="Ingrese nombre de usuario"
+                  helper-text="* El nombre de usuario debe contener un largo mínimo de 3 carácteres y un máximo de 8, puede contener letras y números."
+                  error-text="Porfavor ingrese un nombre de usuario válido"
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Input Nombre -->
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  type="text"
+                  name="nombre"
+                  fill="outline"
+                  label="Nombre"
+                  label-placement="floating"
+                  placeholder="Ingrese su nombre"
+                  pattern="[0-9]{4}"
+                  error-text="Ingreso inválido."
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Input Apellido -->
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  type="text"
+                  name="apellido"
+                  fill="outline"
+                  label="Apellido"
+                  label-placement="floating"
+                  placeholder="Ingrese su apellido paterno"
+                  pattern="[0-9]{4}"
+                  error-text="Ingreso inválido."
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Input Correo -->
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  type="text"
+                  name="apellido"
+                  fill="outline"
+                  label="Correo Electrónico"
+                  label-placement="floating"
+                  placeholder="Ingrese su correo"
+                  pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$"
+                  error-text="Ingreso inválido."
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+             <!-- Input Número de Celular -->
+             <ion-row>
+              <ion-col>
+                <ion-input
+                  id="phone"
+                  type="tel"
+                  name="celular"
+                  fill="outline"
+                  label="Celular"
+                  label-placement="floating"
+                  placeholder="9XXXXXXXX"
+                  pattern="[0-9]{9}"
+                  maxlength="9"
+                  error-text="Ingreso inválido. El número de celular debe tener 9 dígitos."
+                  required
+                  style="flex-grow: 1;">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Input Contraseña -->
+            <ion-row>
+              <ion-col>
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input
+                  type="{{ hidePassword ? 'password' : 'text' }}"
+                  name="contraseña"
+                  placeholder="Ingrese contraseña"
+                  required>
+                </ion-input>
+              </ion-col>
+              <ion-col style="display: flex; align-items: center; justify-content: flex-end;">
+                <div>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="togglePasswordVisibility('password')" style="vertical-align: middle;">
+                      <ion-icon
+                        name="{{ hidePassword ? 'eye-off' : 'eye' }}"
+                        slot="icon-only"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+              </ion-col>
+            </ion-row>
+            <!-- Input Confirmar Contraseña -->
+            <ion-row>
+              <ion-col>
+                <ion-label position="floating">Confirmar Contraseña</ion-label>
+                <ion-input
+                  type="{{ hidePassword ? 'password' : 'text' }}"
+                  name="confirmarContraseña"
+                  placeholder="Confirmar contraseña"
+                  required>
+                </ion-input>
+              </ion-col>
+              <ion-col style="display: flex; align-items: center; justify-content: flex-end;">
+                <div>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="togglePasswordVisibility('confirmar')" style="vertical-align: middle;">
+                      <ion-icon
+                      name="{{ hideConfirmPassword ? 'eye-off' : 'eye' }}"
+                      slot="icon-only"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+              </ion-col>
+            </ion-row>
+            <!-- Botón Ingresar -->
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+              <ion-col>
+                <div class="ion-text-center">
+                  <ion-button shape="round">Confirmar</ion-button>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="ion-text-center">
+                  <a [routerLink]="['/registro']">Crea tu cuenta gratis</a>
+                </div>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>
+
+
+
