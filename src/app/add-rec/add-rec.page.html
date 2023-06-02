@@ -28,22 +28,38 @@
           <ion-card-content>
             <ion-row>
               <ion-col>
-                <ion-input label="Nombre Recordatorio" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio"></ion-input>
+                <ion-input [(ngModel)]="datosTemp.nombreMedicamento" label="Medicamento" label-placement="floating" fill="outline" placeholder="Ingrese nombre del medicamento"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-input label="Nombre Recordatorio" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio"></ion-input>
+                <ion-label>Ingrese el tiempo en horas:</ion-label>
+                <ion-input type="number" [(ngModel)]="tiempoIngresado"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-input label="Nombre Recordatorio" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio"></ion-input>
+                <ion-input [(ngModel)]="dias" type="number" label="Días" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio"></ion-input>
               </ion-col>
             </ion-row>
-            
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button (click)="iniciarTemporizador()">Confirmar</ion-button>
+                <p *ngIf="tiempoRestante">Tiempo restante: {{ tiempoRestante }}</p>
+              </ion-col>
+            </ion-row>
 
-            
+            <ion-row>
+              <ion-col>
+                Nombre Medicamento: {{ datosTemp.nombreMedicamento}}
+              </ion-col>
+              <ion-col>
+                Tiempo ingresado: {{ tiempoIngresado }}
+              </ion-col>
+              <ion-col>
+                Duración: {{ dias }}
+              </ion-col>
+            </ion-row>
           </ion-card-content>
         </ion-card>
         
