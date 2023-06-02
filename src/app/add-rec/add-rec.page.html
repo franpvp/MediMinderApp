@@ -28,7 +28,7 @@
           <ion-card-content>
             <ion-row>
               <ion-col>
-                <ion-input [(ngModel)]="datosTemp.nombreMedicamento" label="Medicamento" label-placement="floating" fill="outline" placeholder="Ingrese nombre del medicamento"></ion-input>
+                <ion-input [(ngModel)]="nombreMedicamento" label="Medicamento" label-placement="floating" fill="outline" placeholder="Ingrese nombre del medicamento"></ion-input>
               </ion-col>
             </ion-row>
             <ion-row>
@@ -45,13 +45,13 @@
             <ion-row>
               <ion-col class="ion-text-center">
                 <ion-button (click)="iniciarTemporizador()">Confirmar</ion-button>
-                <p *ngIf="tiempoRestante">Tiempo restante: {{ tiempoRestante }}</p>
+                <!-- <p *ngIf="tiempoRestante">Tiempo restante: {{ tiempoRestante }}</p> -->
               </ion-col>
             </ion-row>
 
             <ion-row>
               <ion-col>
-                Nombre Medicamento: {{ datosTemp.nombreMedicamento}}
+                Nombre Medicamento: {{ nombreMedicamento}}
               </ion-col>
               <ion-col>
                 Tiempo ingresado: {{ tiempoIngresado }}

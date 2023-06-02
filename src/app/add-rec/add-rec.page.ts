@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-rec',
@@ -7,19 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddRecPage implements OnInit {
 
+  nombreMedicamento: string;
   tiempoRestante: string;
   temporizador: any;
   tiempoIngresado: number;
   dias: number;
+  mensaje: string;
 
-  datosTemp = {
-    nombreMedicamento: ''
-  }
-
-  constructor() { 
+  constructor(private router: Router,private alertController: AlertController) { 
     this.tiempoRestante = '';
     this.tiempoIngresado = 0;
+    this.nombreMedicamento = '';
     this.dias = 0;
+    this.mensaje = '';
   }
 
   ngOnInit() {
@@ -38,10 +40,24 @@ export class AddRecPage implements OnInit {
       if (ahora < tiempoFinalizacion) {
         this.tiempoRestante = this.obtenerTiempoRestante(tiempoFinalizacion, ahora);
       } else {
-        this.recordatorio();
         clearInterval(this.temporizador);
+        this.recordatorio();
+
+        this.mostrarAlerta().then(() => {
+          this.router.navigate(['/home']);
+        });
       }
     }, 1000);
+  }
+  // Mensaje de alerta
+  async mostrarAlerta() {
+    const alert = await this.alertController.create({
+      header: 'Creación Exitosa',
+      message: this.mensaje,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
   }
 
   obtenerTiempoRestante(tiempoFinal: Date, tiempoActual: Date): string {
@@ -53,7 +69,7 @@ export class AddRecPage implements OnInit {
   }
 
   recordatorio() {
-    console.log('¡Es hora del recordatorio!');
+    this.mensaje = 'Tomar medicamento ' + this.nombreMedicamento;
   }
 
 }
