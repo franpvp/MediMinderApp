@@ -4,19 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PerfilPageRoutingModule } from './perfil-routing.module';
+import { NotificacionesPageRoutingModule } from './notificaciones-routing.module';
 
-import { PerfilPage } from './perfil.page';
+import { NotificacionesPage } from './notificaciones.page';
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 
 @NgModule({
-    declarations: [PerfilPage],
+    declarations: [NotificacionesPage],
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        PerfilPageRoutingModule,
+        NotificacionesPageRoutingModule,
         MenuBarComponent
     ]
 })
-export class PerfilPageModule {}
+export class NotificacionesPageModule {}

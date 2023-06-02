@@ -54,10 +54,6 @@
   font-size: 15px;
 }
 
-.img-calendar{
-  width: 128px;
-  height: 128px;
-}
 
 .vertical-center {
   display: flex;
@@ -71,4 +67,26 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+}
+
+.titulo {
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+}
+
+.image-1 {
+  width: 200px; /* Ajusta el ancho deseado */
+  height: 200px; /* Ajusta la altura deseada */
+  object-fit: cover; /* Ajusta la forma en que se muestra la imagen dentro del contenedor */
+}
+
+.image-2 {
+  width: 220px; /* Ajusta el ancho deseado */
+  height: 220px; /* Ajusta la altura deseada */
+  object-fit: contain; /* Ajusta la forma en que se muestra la imagen dentro del contenedor */
 }

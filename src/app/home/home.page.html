@@ -1,15 +1,5 @@
-
-
 <div class="ion-page" id="main-content">
   <!-- Componente menu-bar -->
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
-  </ion-menu>
   <app-menu-bar></app-menu-bar>
   <!-- Contenido -->
   <ion-content [fullscreen]="true">
@@ -18,11 +8,13 @@
         <button class="transparent-button" [routerLink]="['/add-rec']">
           <div class="ion-card-wrapper card-hover">
             <ion-card>
-              <img class="img-calendar" alt="calendar" src="assets/img/Fondo de png-transparent-line-font-line eliminado.png" />
+              <div class="image-container">
+                <img class="image-1" alt="temp" src="assets/img/Fondo de kisspng-timer-clock-animation-clip-art-cartoon-microphone-5adaad32b114e3 eliminado.0385863615242806267253.png" />
+              </div>
               <ion-card-header>
                 <div class="ion-text-center">
-                  <ion-text color="primary">
-                    <h3 class="ion-text-center">Crea tu recordatorio</h3>
+                  <ion-text color="primary" class="titulo">
+                    Crear Recordatorio
                   </ion-text>
                 </div>
               </ion-card-header>
@@ -34,9 +26,13 @@
         <button class="transparent-button" [routerLink]="['/list-rec']">
           <div class="ion-card-wrapper card-hover">
             <ion-card>
-              <img class="img-calendar" alt="calendar" src="assets/img/Fondo de png-transparent-line-font-line eliminado.png" />
+              <div class="image-container">
+                <img class="image-2" alt="calendar" src="assets/img/Fondo de png-transparent-line-font-line eliminado.png" />
+              </div>
               <ion-card-header>
-                <ion-card-title class="texto-titulo">Mis Recordatorios</ion-card-title>
+                <ion-text color="primary" class="titulo">
+                  Recordatorios
+                </ion-text>
               </ion-card-header>
             </ion-card>
           </div>

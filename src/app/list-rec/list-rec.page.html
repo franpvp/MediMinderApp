@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>listRec</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page" id="main-content">
+  <app-menu-bar></app-menu-bar>
+  <ion-content [fullscreen]="true">
+    
+    <ion-row>
+      <ion-col>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle *ngFor="let recordatorio of recordatorioService.recordatorios; let i = index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Recordatorio {{ numbers[i] }}
+              </mat-panel-title>
+              <mat-panel-description>
+                Click para mas detalles
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{ recordatorio }}</p>
+          </mat-expansion-panel>            
+        </mat-accordion>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+</div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">listRec</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+

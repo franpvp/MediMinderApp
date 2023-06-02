@@ -1,3 +1,11 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
 <ion-header mode="md">
   <ion-toolbar color="primary" style="margin-top: 0; background-color: transparent;">
     <ion-buttons slot="start">
@@ -9,8 +17,8 @@
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Mi perfil</button>
-        <button mat-menu-item>Notificaciones</button>
+        <button mat-menu-item (click)="toPerfil()" >Mi perfil</button>
+        <button mat-menu-item (click)="toNotificaciones()">Notificaciones</button>
         <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesión</button>
       </mat-menu>
       <ion-button class="favorite-icon">

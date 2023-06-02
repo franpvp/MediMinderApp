@@ -8,7 +8,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { PerfilPage } from '../perfil/perfil.page';
 
 @Component({
   selector: 'app-menu-bar',
@@ -25,8 +26,7 @@ import { Router } from '@angular/router';
     MatExpansionModule,
     IonicModule,
     FormsModule,
-    MatMenuModule
-
+    MatMenuModule,
   ],
 })
 export class MenuBarComponent  implements OnInit {
@@ -41,6 +41,14 @@ export class MenuBarComponent  implements OnInit {
 
   someMethod() {
     this.trigger.openMenu();
+  }
+
+  toPerfil() {
+    this.router.navigate(['/perfil']);
+  }
+
+  toNotificaciones() {
+    this.router.navigate(['/notificaciones']);
   }
 
   cerrarSesion() {

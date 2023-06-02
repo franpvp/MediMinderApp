@@ -7,14 +7,24 @@ import { IonicModule } from '@ionic/angular';
 import { ListRecPageRoutingModule } from './list-rec-routing.module';
 
 import { ListRecPage } from './list-rec.page';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ListRecPageRoutingModule
-  ],
-  declarations: [ListRecPage]
+    declarations: [ListRecPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ListRecPageRoutingModule,
+        MenuBarComponent,
+        MatExpansionModule,
+        MatPaginatorModule,
+        MatTableModule
+    ]
 })
-export class ListRecPageModule {}
+export class ListRecPageModule {
+
+}
