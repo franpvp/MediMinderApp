@@ -19,6 +19,18 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+  {
+    path: 'add-rec',
+    loadChildren: () => import('./add-rec/add-rec.module').then( m => m.AddRecPageModule)
+  },
+  {
+    path: 'list-rec',
+    loadChildren: () => import('./list-rec/list-rec.module').then( m => m.ListRecPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
 ];
 
 @NgModule({

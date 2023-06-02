@@ -28,8 +28,6 @@
                   label="Usuario"
                   label-placement="floating"
                   pattern="[a-zA-Z0-9]+"
-                  minlength="3"
-                  maxlength="8"
                   placeholder="Ingrese nombre de usuario"
                   error-text="Porfavor ingrese un nombre de usuario válido."
                   required>
@@ -46,6 +44,7 @@
                   fill="outline"
                   label="Contraseña"
                   label-placement="floating"
+                  maxlength="4"
                   placeholder="Ingrese contraseña"
                   error-text="Porfavor ingrese una contraseña válida."
                   required>
@@ -64,6 +63,13 @@
               <ion-col>
                 <div class="ion-text-center">
                   <a [routerLink]="['/registro']">Crear Cuenta</a>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <div class="spinner-container" *ngIf="showSpinner">
+                  <mat-spinner class="small-spinner"></mat-spinner>
                 </div>
               </ion-col>
             </ion-row>

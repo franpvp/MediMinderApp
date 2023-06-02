@@ -25,3 +25,36 @@
 #container a {
   text-decoration: none;
 }
+
+.ion-card-wrapper {
+  display: inline-block;
+  width: 100%;
+}
+
+.ion-card-wrapper {
+  display: inline-block;
+  width: 100%;
+}
+
+.card-hover {
+  transition: transform 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.05);
+}
+
+.transparent-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.texto-titulo {
+  font-size: 15px;
+}
+
+.img-calendar{
+  width: 128px;
+  height: 128px;
+}

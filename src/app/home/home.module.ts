@@ -12,23 +12,23 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatListModule,
-    MatExpansionModule,
-    
-    
-  ],
-  declarations: [HomePage]
+    declarations: [HomePage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatListModule,
+        MatExpansionModule,
+        MenuBarComponent
+    ]
 })
 export class HomePageModule {}

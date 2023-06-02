@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroupDirective,
   NgForm,
@@ -40,11 +41,9 @@ export class RegistroPage implements OnInit {
     apellido: '',
     correo: '',
     celular: '',
-
-
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.emailFormControl.statusChanges.subscribe((status) => {
@@ -56,6 +55,35 @@ export class RegistroPage implements OnInit {
   
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
+
+
+  confirmar() {
+
+    const usuario = this.datos.usuario;
+    const nombre = this.datos.nombre;
+    const apellido = this.datos.apellido;
+    const correo = this.datos.correo;
+    const celular = this.datos.celular;
+
+    if(usuario.length >= 5 && usuario.length <= 8 && /^[a-zA-Z0-9]+$/.test(usuario)) {
+      
+    };
+
+    if(nombre != '' && apellido != '' && correo != '' && celular != '') {
+      
+    };
+ 
+
+  }
+
 
   
 }

@@ -1,3 +1,24 @@
-<p>
-  menu-bar works!
-</p>
+<ion-header mode="md">
+  <ion-toolbar color="primary" style="margin-top: 0; background-color: transparent;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> 
+    </ion-buttons>
+    <ion-title>MediMinder</ion-title>
+    <ion-buttons slot="end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Mi perfil</button>
+        <button mat-menu-item>Notificaciones</button>
+        <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesión</button>
+      </mat-menu>
+      <ion-button class="favorite-icon">
+        <mat-icon slot="icon-only" name="favorite-icon">favorite</mat-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
