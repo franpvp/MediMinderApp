@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -31,6 +31,8 @@ export class RegistroPage implements OnInit {
   apellido: string = '';
   correo: string = '';
   celular: string = '';
+
+  @ViewChild('myForm') myForm!: NgForm;
 
   msgErrorPass: boolean = false;
   msgInputVacio: boolean = false;
@@ -75,31 +77,21 @@ export class RegistroPage implements OnInit {
 
   confirmar() {
 
-    let usuario = this.usuario;
-    let nombre = this.nombre;
-    let apellido = this.apellido;
-    let correo = this.correo;
-    let celular = this.celular;
-
     let password = this.password;
     let confPassword = this.confPassword;
-    
-    if(usuario != '' && nombre != '' && apellido != '' && correo != '' && celular != '') {
+
+    if (this.myForm.valid && this.myForm.dirty) {
       if(password == confPassword && password != '' && confPassword != '') {
         this.router.navigateByUrl('/home');
         this.guardarDatos();
       }
       else {
         this.msgErrorPass = true;
-
       }
     }
     else {
       this.msgInputVacio = true;
     }
-    
-    
-
   }
 
   // Guardar datos del formulario de registro
@@ -120,6 +112,7 @@ export class RegistroPage implements OnInit {
 
   }
 
+  // Quitar avisos de error
   resetearDiv() {
     this.msgErrorPass = false;
     this.msgInputVacio = false;

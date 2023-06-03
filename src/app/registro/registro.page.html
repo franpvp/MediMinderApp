@@ -24,7 +24,7 @@
                   fill="outline"
                   label="Nombre de Usuario"
                   label-placement="floating"
-                  pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,8}$"
+                  pattern="^(?=.*\d)[A-Za-z\d]{6,8}$"
                   placeholder="Ingrese nombre de usuario"
                   helper-text="* Ingrese un nombre de usuario con mínimo 5 caracteres y un máximo de 8, debe tener al menos una letra mayúscula y un dígito."
                   error-text="Por favor, ingrese un nombre de usuario válido."
@@ -117,8 +117,9 @@
                   [(ngModel)]="password"
                   (input)="resetearDiv()"
                   placeholder="Ingrese contraseña"
-                  helper-text=" * La contraseña debe tener al menos una letra mayúscula, un dígito y un caracter especial con un largo mínimo de 8 caracteres y máximo de 15."
+                  helper-text=" * La contraseña debe tener al menos una letra mayúscula, un dígito y un largo mínimo de 8 caracteres y máximo de 15."
                   pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,15}$"
+                  error-text="Incluya mayúscula, y un dígito numérico."
                   required>
                 </ion-input>
               </ion-col>
