@@ -43,6 +43,10 @@ export class MenuBarComponent  implements OnInit {
     this.trigger.openMenu();
   }
 
+  toHome() {
+    this.router.navigate(['/home']);
+  }
+
   toPerfil() {
     this.router.navigate(['/perfil']);
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { MyPerfilService } from '../my-perfil.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,11 @@ import { NavigationExtras, Router } from '@angular/router';
 export class LoginPage implements OnInit {
 
   showSpinner: boolean | undefined;
+  datosUsuario: string[] = [];
+  mostrarMensaje: boolean = false;
+  textoVacio: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private myPerfilService: MyPerfilService) { }
 
   ngOnInit() {
   }
@@ -22,32 +26,46 @@ export class LoginPage implements OnInit {
 
   ingresar() {
     
-    const usuario = this.user.usuario;
-    const contraseña = this.user.password;
-    const showSpinner = false;
+    // Variables
+    const usuario: string = this.user.usuario;
+    const contraseña: string = this.user.password;
+    
+    const showSpinner: boolean = false;
 
-    if (usuario && contraseña) {
+    const usuarioService = this.myPerfilService.getUsuario();
+    const passService = this.myPerfilService.getContraseña();
 
-      if (usuario.length >= 5 && usuario.length <= 8 && /^[a-zA-Z0-9]+$/.test(usuario)) {
-        if (contraseña.length == 4 && /^[0-9]{4}$/.test(contraseña)) {
-          this.showSpinner = true; // Mostrar el spinner
+    if(usuario != '' && contraseña != ''){
+      if(usuario == usuarioService && contraseña == passService) {
+        this.showSpinner = true; // Mostrar el spinner
+        
           
-          setTimeout(() => {
-            let navigationExtras: NavigationExtras = {
-              state: {
-                user: this.user
-              }
-            };
-          this.router.navigate(['/home'], navigationExtras);
-
+        setTimeout(() => {
+          let navigationExtras: NavigationExtras = {
+            state: {
+              user: this.user
+            }
+          };
+        this.router.navigate(['/home'], navigationExtras);
+  
           this.showSpinner = false;
-        }, 2000);
-  }
-}
-      
-    } else {
-      console.log('Por favor, completa todos los campos.');
+        }, 1500);
+      }
+      else {
+        this.mostrarMensaje = true;
+      }
     }
   }
 
+  resetearDiv() {
+    this.mostrarMensaje = false;
+  }
+
+
 }
+
+
+
+  
+
+

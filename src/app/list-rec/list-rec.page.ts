@@ -16,9 +16,6 @@ export class ListRecPage implements OnInit {
 
   constructor(public recordatorioService: RecordatorioService) {
 
-    for (let i = 1; i <= 10; i++) {
-      this.numbers.push(i);
-    }
    }
 
   ngOnInit() {

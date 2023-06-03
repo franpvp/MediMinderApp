@@ -18,17 +18,16 @@
                 <ion-input
                   class="usuario"
                   name="nombreUsuario"
-                  [(ngModel)]="datos.usuario"
+                  [(ngModel)]="usuario"
+                  (input)="resetearDiv()"
                   type="text"
                   fill="outline"
                   label="Nombre de Usuario"
                   label-placement="floating"
-                  pattern="[a-zA-Z0-9]+"
-                  minlength="3"
-                  maxlength="8"
+                  pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,8}$"
                   placeholder="Ingrese nombre de usuario"
-                  helper-text="* El nombre de usuario debe contener un largo mínimo de 3 carácteres y un máximo de 8, puede contener letras y números."
-                  error-text="Porfavor ingrese un nombre de usuario válido"
+                  helper-text="* Ingrese un nombre de usuario con mínimo 5 caracteres y un máximo de 8, debe tener al menos una letra mayúscula y un dígito."
+                  error-text="Por favor, ingrese un nombre de usuario válido."
                   required>
                 </ion-input>
               </ion-col>
@@ -39,12 +38,13 @@
                 <ion-input
                   type="text"
                   name="nombre"
-                  [(ngModel)]="datos.nombre"
+                  [(ngModel)]="nombre"
+                  (input)="resetearDiv()"
                   fill="outline"
                   label="Nombre"
                   label-placement="floating"
                   placeholder="Ingrese su nombre"
-                  pattern="[0-9]{4}"
+                  pattern="^[A-Za-z]{2,}$"
                   error-text="Ingreso inválido."
                   required>
                 </ion-input>
@@ -56,12 +56,13 @@
                 <ion-input
                   type="text"
                   name="apellido"
-                  [(ngModel)]="datos.apellido"
+                  [(ngModel)]="apellido"
+                  (input)="resetearDiv()"
                   fill="outline"
                   label="Apellido"
                   label-placement="floating"
-                  placeholder="Ingrese su apellido paterno"
-                  pattern="[0-9]{4}"
+                  placeholder="Ingrese apellido"
+                  pattern="^[A-Za-z]{2,}$"
                   error-text="Ingreso inválido."
                   required>
                 </ion-input>
@@ -72,14 +73,15 @@
               <ion-col>
                 <ion-input
                   type="text"
-                  name="apellido"
-                  [(ngModel)]="datos.correo"
+                  name="correo"
+                  [(ngModel)]="correo"
+                  (input)="resetearDiv()"
                   fill="outline"
                   label="Correo Electrónico"
                   label-placement="floating"
                   placeholder="Ingrese su correo"
                   pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$"
-                  error-text="Ingreso inválido."
+                  error-text="Ingrese un correo válido."
                   required>
                 </ion-input>
               </ion-col>
@@ -90,7 +92,8 @@
                 <ion-input
                   id="phone"
                   type="tel"
-                  [(ngModel)]="datos.celular"
+                  [(ngModel)]="celular"
+                  (input)="resetearDiv()"
                   name="celular"
                   fill="outline"
                   label="Celular"
@@ -111,7 +114,11 @@
                 <ion-input
                   type="{{ hidePassword ? 'password' : 'text' }}"
                   name="contraseña"
+                  [(ngModel)]="password"
+                  (input)="resetearDiv()"
                   placeholder="Ingrese contraseña"
+                  helper-text=" * La contraseña debe tener al menos una letra mayúscula, un dígito y un caracter especial con un largo mínimo de 8 caracteres y máximo de 15."
+                  pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,15}$"
                   required>
                 </ion-input>
               </ion-col>
@@ -135,28 +142,32 @@
                 <ion-input
                   type="{{ hidePassword ? 'password' : 'text' }}"
                   name="confirmarContraseña"
+                  [(ngModel)]="confPassword"
+                  (input)="resetearDiv()"
                   placeholder="Confirmar contraseña"
                   required>
                 </ion-input>
-              </ion-col>
-              <ion-col style="display: flex; align-items: center; justify-content: flex-end;">
-                <div>
-                  <ion-buttons slot="end">
-                    <ion-button (click)="togglePasswordVisibility('confirmar')" style="vertical-align: middle;">
-                      <ion-icon
-                      name="{{ hideConfirmPassword ? 'eye-off' : 'eye' }}"
-                      slot="icon-only"
-                      ></ion-icon>
-                    </ion-button>
-                  </ion-buttons>
-                </div>
               </ion-col>
             </ion-row>
             <!-- Botón Ingresar -->
             <ion-row class="ion-justify-content-center ion-align-items-center">
               <ion-col>
                 <div class="ion-text-center">
-                  <ion-button [routerLink]="['/home']" mat-raised-button shape="round" color="primary">Confirmar</ion-button>
+                  <ion-button (click)="confirmar()" mat-raised-button shape="round" color="primary">Confirmar</ion-button>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <div class="msgError" *ngIf="msgErrorPass">
+                  Las contraseñas no coinciden.
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <div class="msgError" *ngIf="msgInputVacio">
+                  Debe llenar todos los campos.
                 </div>
               </ion-col>
             </ion-row>

@@ -60,6 +60,7 @@ export class AddRecPage implements OnInit {
 
 
     this.recordatorio();
+    // Se agrega recordatorio y se guarda en el servicio
     this.agregarRecordatorio();
     this.mostrarAlerta().then(() => {
       setTimeout(() => {
