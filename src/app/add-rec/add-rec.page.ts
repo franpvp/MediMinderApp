@@ -90,11 +90,6 @@ export class AddRecPage implements OnInit {
           value: this.mensajeDias,
           disabled: true
         },
-        {
-          type: 'text',
-          value: this.tiempoRestante,
-          disabled: true
-        },
       ],
       buttons: ['OK']
     });
@@ -109,7 +104,7 @@ export class AddRecPage implements OnInit {
       inputs: [
         {
           type: 'text',
-          value: 'Hora de tomar: ' + this.nombreMedicamento,
+          value: 'Tomar medicamento: ' + this.nombreMedicamento,
           disabled: true
         },
       ],
@@ -140,4 +135,15 @@ export class AddRecPage implements OnInit {
                       Duración estimada: ${this.dias} días`;
     this.recordatorioService.agregarRecordatorio(recordatorio);
   } 
+
+
+  enviarInformacionAlerta() {
+    const informacionAlerta = {
+      header: 'Notificación',
+      mensaje: 'Hora de tomar: ' + this.nombreMedicamento
+    };
+    
+    // Enviar la información de la alerta a través del servicio
+    this.recordatorioService.enviarAlerta(informacionAlerta);
+  }
 }

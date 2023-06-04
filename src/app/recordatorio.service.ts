@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class RecordatorioService {
 
   recordatorios: string[] = [];
+  private alertSubject: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -16,6 +18,14 @@ export class RecordatorioService {
 
   cargarRecordatorios(recordatorios: string[]) {
     this.recordatorios = recordatorios;
+  }
+
+  enviarAlerta(alerta: any) {
+    this.alertSubject.next(alerta);
+  }
+
+  getAlertSubject() {
+    return this.alertSubject.asObservable();
   }
 
 

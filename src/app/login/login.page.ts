@@ -26,7 +26,6 @@ export class LoginPage implements OnInit {
 
   ingresar() {
     
-    // Variables
     const usuario: string = this.user.usuario;
     const contraseña: string = this.user.password;
     
@@ -60,7 +59,6 @@ export class LoginPage implements OnInit {
   resetearDiv() {
     this.mostrarMensaje = false;
   }
-
 
 }
 

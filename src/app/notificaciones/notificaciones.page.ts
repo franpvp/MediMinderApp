@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notificaciones.page.scss'],
 })
 export class NotificacionesPage implements OnInit {
+  constructor() {
 
-  constructor() { }
+
+    
+   }
 
   ngOnInit() {
   }
+
+
 
 }
