@@ -14,7 +14,7 @@
               <ng-container *ngIf="recordatorioService.recordatorios.length > 0; else noRecordatorios">
               </ng-container>
               <ng-template #noRecordatorios>
-                <p>No hay recordatorios todavía.</p>
+                <p>No hay recordatorios.</p>
               </ng-template>
               
               <mat-expansion-panel hideToggle *ngFor="let recordatorio of recordatorioService.recordatorios; let i = index">
@@ -31,7 +31,7 @@
             </mat-accordion>
           </ion-card-content>
           <ion-card-content style="display: flex; justify-content: center;">
-            <button class="botonRedondo">
+            <button [routerLink]="['/add-rec']" routerLinkActive="router-link-active"  class="botonRedondo">
               <ion-icon name="add"></ion-icon>
             </button>
           </ion-card-content>
