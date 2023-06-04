@@ -8,6 +8,7 @@ import { AddRecPageRoutingModule } from './add-rec-routing.module';
 
 import { AddRecPage } from './add-rec.page';
 
+// Custom Component
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 

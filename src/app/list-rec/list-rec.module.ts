@@ -7,9 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { ListRecPageRoutingModule } from './list-rec-routing.module';
 
 import { ListRecPage } from './list-rec.page';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+
+// Componentes Angular Material
+import { MatExpansionModule } from '@angular/material/expansion';
+
+// Custom Component
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 
@@ -22,8 +24,6 @@ import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
         ListRecPageRoutingModule,
         MenuBarComponent,
         MatExpansionModule,
-        MatPaginatorModule,
-        MatTableModule,
         SlideMenuComponent
     ]
 })

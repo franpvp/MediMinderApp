@@ -104,7 +104,7 @@ export class AddRecPage implements OnInit {
       inputs: [
         {
           type: 'text',
-          value: 'Tomar medicamento: ' + this.nombreMedicamento,
+          value: 'Tomar: ' + this.nombreMedicamento,
           disabled: true
         },
       ],

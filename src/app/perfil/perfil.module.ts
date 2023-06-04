@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
+
+// Custom Component
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
 import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 

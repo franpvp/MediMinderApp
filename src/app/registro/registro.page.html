@@ -80,8 +80,7 @@
                   label="Correo Electrónico"
                   label-placement="floating"
                   placeholder="Ingrese su correo"
-                  (input)="validarCorreo(correo)"
-                  [attr.error-text]="mostrarErrorCorreo ? 'Ingrese un correo válido.' : null"
+                  pattern="[a-zA-Z0-9._%+-]+@(gmail|hotmail)\.com"
                   required>
                 </ion-input>
               </ion-col>

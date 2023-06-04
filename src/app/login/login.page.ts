@@ -36,9 +36,7 @@ export class LoginPage implements OnInit {
 
     if(usuario != '' && contraseña != ''){
       if(usuario == usuarioService && contraseña == passService) {
-        this.showSpinner = true; // Mostrar el spinner
-        
-          
+        this.showSpinner = true;
         setTimeout(() => {
           let navigationExtras: NavigationExtras = {
             state: {

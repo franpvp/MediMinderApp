@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroupDirective,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -36,48 +34,20 @@ export class RegistroPage implements OnInit {
 
   msgErrorPass: boolean = false;
   msgInputVacio: boolean = false;
-
-  isEmailRequiredError: boolean = false;
-
   hidePassword: boolean = true;
-  hideConfirmPassword: boolean = true;
-  mostrarErrorCorreo: boolean = false;
 
+  // Icono para dar visibilidad
   togglePasswordVisibility(inputType: string) {
     if (inputType === 'password') {
       this.hidePassword = !this.hidePassword;
-    } else if (inputType === 'confirmar') {
-      this.hideConfirmPassword = !this.hideConfirmPassword;
-    }
+    } 
   }
-    
-
-  datosUsuario: string[] = [];
-
-  constructor(private router: Router, private _formBuilder: FormBuilder, private myPerfilService: MyPerfilService) { }
+  constructor(private router: Router, private myPerfilService: MyPerfilService) { }
 
   ngOnInit() {
-    this.emailFormControl.statusChanges.subscribe((status) => {
-      this.isEmailRequiredError = status === 'INVALID' && this.emailFormControl.hasError('required');
-    });
   }
 
-  hide = true;
-  
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  matcher = new MyErrorStateMatcher();
-
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  isLinear = false;
-
-
   confirmar() {
-
     let password = this.password;
     let confPassword = this.confPassword;
 
@@ -94,7 +64,6 @@ export class RegistroPage implements OnInit {
       this.msgInputVacio = true;
     }
   }
-
   // Guardar datos del formulario de registro
   guardarDatos() {
     let usuario: string = this.usuario;
@@ -112,22 +81,8 @@ export class RegistroPage implements OnInit {
     this.myPerfilService.setCelular(celular);
 
   }
-
-  validarCorreo(correo: string) {
-    var regexCorreo = /[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$/;
-    if(regexCorreo.test(correo)) {
-      this.mostrarErrorCorreo = true;
-    } else {
-      this.mostrarErrorCorreo = false;
-    }
-    
-  } 
-
-  // Quitar avisos de error
   resetearDiv() {
     this.msgErrorPass = false;
     this.msgInputVacio = false;
   }
-
-  
 }
