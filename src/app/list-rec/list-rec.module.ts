@@ -11,6 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
+import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 
 @NgModule({
     declarations: [ListRecPage],
@@ -22,7 +23,8 @@ import { MenuBarComponent } from "../menu-bar/menu-bar.component";
         MenuBarComponent,
         MatExpansionModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
+        SlideMenuComponent
     ]
 })
 export class ListRecPageModule {

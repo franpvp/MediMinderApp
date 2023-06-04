@@ -41,6 +41,7 @@ export class RegistroPage implements OnInit {
 
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
+  mostrarErrorCorreo: boolean = false;
 
   togglePasswordVisibility(inputType: string) {
     if (inputType === 'password') {
@@ -111,6 +112,16 @@ export class RegistroPage implements OnInit {
     this.myPerfilService.setCelular(celular);
 
   }
+
+  validarCorreo(correo: string) {
+    var regexCorreo = /[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$/;
+    if(regexCorreo.test(correo)) {
+      this.mostrarErrorCorreo = true;
+    } else {
+      this.mostrarErrorCorreo = false;
+    }
+    
+  } 
 
   // Quitar avisos de error
   resetearDiv() {

@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
+import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 
 @NgModule({
     declarations: [HomePage],
@@ -28,7 +29,8 @@ import { MenuBarComponent } from "../menu-bar/menu-bar.component";
         MatSidenavModule,
         MatListModule,
         MatExpansionModule,
-        MenuBarComponent
+        MenuBarComponent,
+        SlideMenuComponent
     ]
 })
 export class HomePageModule {}

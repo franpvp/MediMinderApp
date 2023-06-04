@@ -1,22 +1,19 @@
-<ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
-</ion-menu>
-<app-menu-bar></app-menu-bar>
+<app-slide-menu></app-slide-menu>
+<div class="ion-page" id="main-content">
+  <app-menu-bar></app-menu-bar>
 
-<ion-content [fullscreen]="true">
-  <ion-card class="ion-text-center">
-    <ion-card-header>
-      <ion-card-title>
-        Notificaciones
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Mensajes
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-card class="ion-text-center">
+      <ion-card-header>
+        <ion-card-title>
+          Notificaciones
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Mensajes
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>
+
+

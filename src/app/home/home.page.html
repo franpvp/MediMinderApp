@@ -1,8 +1,9 @@
-<div class="ion-page" id="main-content">
-  <!-- Componente menu-bar -->
+<!-- Componente Slide Menu -->
+<app-slide-menu></app-slide-menu>
+<!-- Boton Menu -->
+<div class="ion-page" id="main-content" (click)="closeMenu()">
   <app-menu-bar></app-menu-bar>
-  <!-- Contenido -->
-  <ion-content [fullscreen]="true">
+  <ion-content [fullscreen]="true" >
     <ion-row class="ion-justify-content-center ion-align-items-center">
       <ion-col class="ion-text-center">
         <button class="transparent-button" [routerLink]="['/add-rec']">
@@ -41,10 +42,7 @@
         </button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col>
-
-      </ion-col>
-    </ion-row>
   </ion-content>
 </div>
+
+

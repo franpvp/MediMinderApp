@@ -8,6 +8,7 @@ import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
 import { MenuBarComponent } from "../menu-bar/menu-bar.component";
+import { SlideMenuComponent } from '../slide-menu/slide-menu.component';
 
 @NgModule({
     declarations: [PerfilPage],
@@ -16,7 +17,8 @@ import { MenuBarComponent } from "../menu-bar/menu-bar.component";
         FormsModule,
         IonicModule,
         PerfilPageRoutingModule,
-        MenuBarComponent
+        MenuBarComponent,
+        SlideMenuComponent
     ]
 })
 export class PerfilPageModule {}

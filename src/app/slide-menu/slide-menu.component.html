@@ -1,0 +1,33 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="ion-text-center">Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding ion-text-center">
+    <ion-button (click)="toHome()" class="expanded-button">
+      Inicio
+      <ion-icon slot="start" name="home"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toPerfil()" class="expanded-button">
+      Perfil
+      <ion-icon slot="start" name="person"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toCrearRec()" class="expanded-button">
+      Crear Recordatorio
+      <ion-icon slot="start" name="create"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toRegistroRec()" class="expanded-button">
+      Recordatorios
+      <ion-icon slot="start" name="list"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toNotificaciones()" class="expanded-button">
+      Notificaciones
+      <ion-icon slot="start" name="notifications"></ion-icon>
+    </ion-button>
+    <ion-button (click)="cerrarSesion()" class="expanded-button">
+      Cerrar Sesión
+      <ion-icon slot="start" name="log-out"></ion-icon>
+    </ion-button>
+  </ion-content>
+</ion-menu>

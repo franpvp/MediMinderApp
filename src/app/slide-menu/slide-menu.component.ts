@@ -1,20 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule, MatMenuPanel, MatMenuTrigger } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { PerfilPage } from '../perfil/perfil.page';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+
 
 @Component({
-  selector: 'app-menu-bar',
-  templateUrl: './menu-bar.component.html',
-  styleUrls: ['./menu-bar.component.scss'],
+  selector: 'app-slide-menu',
+  templateUrl: './slide-menu.component.html',
+  styleUrls: ['./slide-menu.component.scss'],
   standalone: true,
   imports: [
     MatIconModule,
@@ -29,16 +29,11 @@ import { PerfilPage } from '../perfil/perfil.page';
     MatMenuModule,
   ],
 })
-export class MenuBarComponent  implements OnInit {
-  menu!: MatMenuPanel<any> | null;
+export class SlideMenuComponent  implements OnInit {
 
   constructor(private router: Router) { }
 
   ngOnInit() {}
-
-  @ViewChild(MatMenuTrigger)
-  trigger!: MatMenuTrigger;
-
 
   toHome() {
     this.router.navigate(['/home']);
