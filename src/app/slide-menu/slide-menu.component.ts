@@ -51,10 +51,6 @@ export class SlideMenuComponent  implements OnInit {
     this.router.navigate(['/list-rec']);
   }
 
-  toNotificaciones() {
-    this.router.navigate(['/notificaciones']);
-  }
-
   cerrarSesion() {
     // Redireccionar al componente de login
     this.router.navigate(['/login']);
