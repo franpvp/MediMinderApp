@@ -17,4 +17,6 @@ export class RecordatorioService {
   cargarRecordatorios(recordatorios: string[]) {
     this.recordatorios = recordatorios;
   }
+
+
 }

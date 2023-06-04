@@ -30,8 +30,7 @@ export class AddRecPage implements OnInit {
     this.mensajeMed = '';
     this.mensajeHoras = '';
     this.mensajeDias = '';
-    this.mensajeTiempo = '';
-    
+    this.mensajeTiempo = '';    
   }
 
   ngOnInit() {
@@ -39,7 +38,6 @@ export class AddRecPage implements OnInit {
 
   iniciarTemporizador(formulario: NgForm) {
     if (formulario.invalid) {
-      // Mostrar mensaje de error o realizar alguna acción adicional
       return;
     }
     if (this.temporizador) {
@@ -54,26 +52,25 @@ export class AddRecPage implements OnInit {
       if (ahora < tiempoFinalizacion) {
         this.tiempoRestante = this.obtenerTiempoRestante(tiempoFinalizacion, ahora);
       } else {
+        this.mostrarAlertaTermino();
+
         clearInterval(this.temporizador);
       }
+      
     }, 1000);
 
-
     this.recordatorio();
-    // Se agrega recordatorio y se guarda en el servicio
     this.agregarRecordatorio();
+
     this.mostrarAlerta().then(() => {
       setTimeout(() => {
         this.router.navigate(['/home']);
       }, 1000);
     });
-    
+
   }
 
   async mostrarAlerta() {
-    const horaActual = new Date();
-    const tiempoFinalizacion = new Date(horaActual.getTime() + this.tiempoIngresado * 60 * 60 * 1000);
-    const tiempoRestante = this.obtenerTiempoRestante(tiempoFinalizacion, new Date());
     const alert = await this.alertController.create({
       header: 'Creación Exitosa',
       cssClass: 'multiline-alert',
@@ -93,13 +90,35 @@ export class AddRecPage implements OnInit {
           value: this.mensajeDias,
           disabled: true
         },
+        {
+          type: 'text',
+          value: this.tiempoRestante,
+          disabled: true
+        },
       ],
       buttons: ['OK']
     });
 
-    
     await alert.present();
   }
+
+  async mostrarAlertaTermino() {
+    const alerta = await this.alertController.create({
+      header: 'Notificación',
+      cssClass: 'multiline-alert',
+      inputs: [
+        {
+          type: 'text',
+          value: 'Hora de tomar: ' + this.nombreMedicamento,
+          disabled: true
+        },
+      ],
+      buttons: ['OK']
+    });
+
+    await alerta.present();
+  }
+
 
   obtenerTiempoRestante(tiempoFinal: Date, tiempoActual: Date): string {
     const diferencia = tiempoFinal.getTime() - tiempoActual.getTime();
@@ -116,8 +135,8 @@ export class AddRecPage implements OnInit {
   }
 
   agregarRecordatorio() {
-    const recordatorio = `Medicamento: ${this.nombreMedicamento}\n
-                      Cada: ${this.tiempoIngresado} hrs\n
+    const recordatorio = `Medicamento: ${this.nombreMedicamento}
+                      Cada: ${this.tiempoIngresado} hrs
                       Duración estimada: ${this.dias} días`;
     this.recordatorioService.agregarRecordatorio(recordatorio);
   } 

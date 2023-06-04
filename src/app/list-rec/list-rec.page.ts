@@ -14,11 +14,17 @@ export class ListRecPage implements OnInit {
   panelOpenState = false;
   numbers: number[] = [];
 
+  tiempoRestante: string[] = [];
+
   constructor(public recordatorioService: RecordatorioService) {
 
+    for (let i = 1; i <= 100; i++) {
+      this.numbers.push(i);
+    }
    }
 
   ngOnInit() {
+
     const recordatorios = this.recordatorioService.recordatorios;
     this.recordatorioService.cargarRecordatorios(recordatorios);
 

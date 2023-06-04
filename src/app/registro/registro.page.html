@@ -109,7 +109,7 @@
             </ion-row>
             <!-- Input Contraseña -->
             <ion-row>
-              <ion-col>
+              <ion-col size="11">
                 <ion-label position="floating">Contraseña</ion-label>
                 <ion-input
                   type="{{ hidePassword ? 'password' : 'text' }}"
@@ -123,8 +123,8 @@
                   required>
                 </ion-input>
               </ion-col>
-              <ion-col style="display: flex; align-items: center; justify-content: flex-end;">
-                <div>
+              <ion-col class="icono">
+                <div class="ion-text-center">
                   <ion-buttons slot="end">
                     <ion-button (click)="togglePasswordVisibility('password')" style="vertical-align: middle;">
                       <ion-icon
@@ -138,7 +138,7 @@
             </ion-row>
             <!-- Input Confirmar Contraseña -->
             <ion-row>
-              <ion-col>
+              <ion-col size="11">
                 <ion-label position="floating">Confirmar Contraseña</ion-label>
                 <ion-input
                   type="{{ hidePassword ? 'password' : 'text' }}"
