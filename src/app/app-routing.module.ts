@@ -4,7 +4,6 @@ import { AuthGuardService } from './services/authguard-service/auth-guard.servic
 
 import { HomePage } from 'src/app/pages/home/home.page';
 import { PerfilPage } from 'src/app/pages/perfil/perfil.page';
-import { ConsultaMedPage } from 'src/app/pages/consulta-med/consulta-med.page';
 
 const routes: Routes = [
   {
@@ -36,10 +35,6 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
-  },
-  {
-    path: 'consulta-med',
-    loadChildren: () => import('./pages/consulta-med/consulta-med.module').then( m => m.ConsultaMedPageModule)
   },
 ];
 
