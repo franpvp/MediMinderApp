@@ -38,6 +38,8 @@ export class RegistroPage implements OnInit {
   msgInputVacio: boolean = false;
   hidePassword: boolean = true;
 
+  mensaje: string = '';
+
   // Icono para dar visibilidad
   togglePasswordVisibility(inputType: string) {
     if (inputType === 'password') {
@@ -63,11 +65,14 @@ export class RegistroPage implements OnInit {
         });
       }
       else {
-        this.msgErrorPass = true;
+        this.mensaje = 'Las contraseñas no coinciden.';
+        let mensaje = this.mensaje;
+        this.presentToast(mensaje);
       }
     }
     else {
-      this.msgInputVacio = true;
+      let mensaje = 'Debe llenar todos los campos.';
+      this.presentToast(mensaje);
     }
   }
   // Guardar datos del formulario de registro
@@ -84,7 +89,8 @@ export class RegistroPage implements OnInit {
         console.log('USUARIO VALIDADO');
         this.router.navigate(['/home']);
       }else {
-        this.presentToast();
+        let mensaje = 'Usuario ya existe';
+        this.presentToast(mensaje);
         console.log('NO SE HA GUARDADO EL USUARIO');
       }
     }).catch(error => {
@@ -98,10 +104,11 @@ export class RegistroPage implements OnInit {
   }
 
   // Mensaje toast
-  async presentToast() {
+  async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
-      message: 'Usuario ya existe',
-      duration: 2000
+      message: mensaje,
+      duration: 2000,
+      cssClass: 'toast-centered'
     });
     toast.present();
   }

@@ -25,6 +25,14 @@ export class LoginPage implements OnInit {
     password: ""
   }
 
+  hidePassword: boolean = true;
+  // Visibilidad de Contraseña
+  togglePasswordVisibility(inputType: string) {
+    if (inputType === 'password') {
+      this.hidePassword = !this.hidePassword;
+    } 
+  }
+
   ingresar() {
     const usuario: string = this.user.usuario;
     const contrasena: string = this.user.password;

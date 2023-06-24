@@ -8,6 +8,9 @@
     <ion-card>
       <ion-card-header>
         <img class="logo" src="assets/img/medicine-schedule-or-medical-reminder-planner-flat-style-design-illustration-vector.jpg"/>
+        <ion-card-title class="titulo-app ion-text-center">
+          Bienvenido a MediMinder
+        </ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <!-- Input Usuario -->
@@ -37,7 +40,7 @@
             <ion-row>
               <ion-col>
                 <ion-input
-                  type="password"
+                  type="{{ hidePassword ? 'password' : 'text' }}"
                   name="password" 
                   [(ngModel)]="user.password"
                   (input)="resetearDiv()"
@@ -48,6 +51,18 @@
                   error-text="Ingrese contraseña."
                   required>
                 </ion-input>
+              </ion-col>
+              <ion-col size="2" class="icono">
+                <div class="ion-text-center">
+                  <ion-buttons slot="end">
+                    <ion-button (click)="togglePasswordVisibility('password')" style="vertical-align: middle;">
+                      <ion-icon
+                        name="{{ hidePassword ? 'eye-off' : 'eye' }}"
+                        slot="icon-only"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
               </ion-col>
             </ion-row>
             <!-- Botón Ingresar -->
@@ -68,7 +83,9 @@
             <ion-row>
               <ion-col>
                 <div class="ion-text-center">
-                  <a [routerLink]="['/registro']">Crear Cuenta</a>
+                  <ion-button [routerLink]="['/registro']" color="tertiary" shape="round" fill="outline">
+                    Crear Cuenta
+                  </ion-button>
                 </div>
               </ion-col>
             </ion-row>

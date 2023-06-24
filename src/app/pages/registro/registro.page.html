@@ -11,7 +11,7 @@
         <ion-list>
           <form #myForm="ngForm">
             <ion-card-header class="ion-text-center">
-              <ion-title class="titulo-login">Formulario Registro</ion-title>
+              <ion-title class="titulo-registro">Registro</ion-title>
             </ion-card-header>
             <ion-row>
               <ion-col>
@@ -81,6 +81,7 @@
                   label-placement="floating"
                   placeholder="Ingrese su correo"
                   pattern="[a-zA-Z0-9._%+-]+@(gmail|hotmail)\.com"
+                  error-text="Correo inválido."
                   required>
                 </ion-input>
               </ion-col>
@@ -145,6 +146,7 @@
                   [(ngModel)]="confPassword"
                   (input)="resetearDiv()"
                   placeholder="Confirmar contraseña"
+                  error-text="Deben coincidir las contraseñas."
                   required>
                 </ion-input>
               </ion-col>
@@ -161,13 +163,6 @@
               <ion-col class="ion-text-center">
                 <div class="msgError" *ngIf="msgErrorPass">
                   Las contraseñas no coinciden.
-                </div>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col class="ion-text-center">
-                <div class="msgError" *ngIf="msgInputVacio">
-                  Debe llenar todos los campos.
                 </div>
               </ion-col>
             </ion-row>
