@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './services/authguard-service/auth-guard.service';
+
+import { HomePage } from 'src/app/pages/home/home.page';
+import { PerfilPage } from 'src/app/pages/perfil/perfil.page';
+import { ConsultaMedPage } from 'src/app/pages/consulta-med/consulta-med.page';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
   {
     path: '',
     redirectTo: 'login',
@@ -13,23 +14,32 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
     path: 'add-rec',
-    loadChildren: () => import('./add-rec/add-rec.module').then( m => m.AddRecPageModule)
+    loadChildren: () => import('./pages/add-rec/add-rec.module').then( m => m.AddRecPageModule)
   },
   {
     path: 'list-rec',
-    loadChildren: () => import('./list-rec/list-rec.module').then( m => m.ListRecPageModule)
+    loadChildren: () => import('./pages/list-rec/list-rec.module').then( m => m.ListRecPageModule)
   },
   {
     path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'consulta-med',
+    loadChildren: () => import('./pages/consulta-med/consulta-med.module').then( m => m.ConsultaMedPageModule)
   },
 ];
 

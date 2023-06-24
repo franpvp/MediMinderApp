@@ -1,0 +1,90 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="ion-text-center">MediMinder</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-header>
+        <img class="logo" src="assets/img/medicine-schedule-or-medical-reminder-planner-flat-style-design-illustration-vector.jpg"/>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Input Usuario -->
+        <ion-list>
+          <form #myForm="ngForm">
+            <ion-card-header class="ion-text-center">
+              <ion-title class="titulo-login">Iniciar Sesión</ion-title>
+            </ion-card-header>
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  class="usuario"
+                  name="usuario"
+                  [(ngModel)]="user.usuario"
+                  (input)="resetearDiv()"
+                  type="text"
+                  fill="outline"
+                  label="Nombre de Usuario"
+                  label-placement="floating"
+                  placeholder="Ingrese nombre de usuario"
+                  error-text="Ingrese nombre de usuario."
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Input Contraseña -->
+            <ion-row>
+              <ion-col>
+                <ion-input
+                  type="password"
+                  name="password" 
+                  [(ngModel)]="user.password"
+                  (input)="resetearDiv()"
+                  fill="outline"
+                  label="Contraseña"
+                  label-placement="floating"
+                  placeholder="Ingrese contraseña"
+                  error-text="Ingrese contraseña."
+                  required>
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <!-- Botón Ingresar -->
+            <ion-row class="ion-justify-content-center ion-align-items-center">
+              <ion-col>
+                <div class="ion-text-center">
+                  <ion-button (click)="ingresar()" shape="round">Ingresar</ion-button>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <div class="msgError" *ngIf="mostrarMensaje">
+                  Nombre de usuario o contraseña incorrectos.
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <div class="ion-text-center">
+                  <a [routerLink]="['/registro']">Crear Cuenta</a>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <div class="spinner-container" *ngIf="showSpinner">
+                  <mat-spinner class="small-spinner"></mat-spinner>
+                </div>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>
+
+
+

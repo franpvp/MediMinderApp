@@ -1,0 +1,48 @@
+<!-- Componente Slide Menu -->
+<app-slide-menu></app-slide-menu>
+<!-- Boton Menu -->
+<div class="ion-page" id="main-content" (click)="closeMenu()">
+  <app-menu-bar></app-menu-bar>
+  <ion-content [fullscreen]="true">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col class="ion-text-center">
+        <button class="transparent-button" [routerLink]="['/add-rec']">
+          <div class="ion-card-wrapper card-hover">
+            <ion-card>
+              <div class="image-container">
+                <img class="image-1" alt="temp" src="assets/img/Fondo de kisspng-timer-clock-animation-clip-art-cartoon-microphone-5adaad32b114e3 eliminado.0385863615242806267253.png" />
+              </div>
+              <ion-card-header>
+                <div class="ion-text-center">
+                  <ion-text color="primary" class="titulo">
+                    Crear Recordatorio
+                  </ion-text>
+                </div>
+              </ion-card-header>
+            </ion-card>
+          </div>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <button class="transparent-button" [routerLink]="['/list-rec']">
+          <div class="ion-card-wrapper card-hover">
+            <ion-card>
+              <div class="image-container">
+                <img class="image-2" alt="calendar" src="assets/img/Fondo de png-transparent-line-font-line eliminado.png" />
+              </div>
+              <ion-card-header>
+                <ion-text color="primary" class="titulo">
+                  Recordatorios
+                </ion-text>
+              </ion-card-header>
+            </ion-card>
+          </div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+</div>
+
+

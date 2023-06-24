@@ -8,10 +8,22 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+// Native Storage
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, NativeStorage],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule
+    ]
 })
 export class AppModule {}
