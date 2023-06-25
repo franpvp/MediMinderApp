@@ -16,17 +16,32 @@
             <form #formulario="ngForm" (ngSubmit)="iniciarTemporizador(formulario)">
               <ion-row>
                 <ion-col>
-                  <ion-input [(ngModel)]="nombreMedicamento" name="nombreMedicamento" label="Medicamento" label-placement="floating" fill="outline" placeholder="Ingrese nombre del medicamento" required></ion-input>
+                  <ion-item>
+                    <ion-input #buscador [debounce]="1000" (ionInput)="buscarMedicamento($event)" animated="true" label="Medicamento" label-placement="floating" placeholder="Ingrese medicamento"></ion-input>
+                  </ion-item>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-input [(ngModel)]="tiempoIngresado" name="tiempoIngresado" type="number" label="Ingrese el tiempo en horas:" label-placement="floating" fill="outline" required></ion-input>
+                  <ion-list *ngIf="showSuggestions" fill="outline">
+                    <ion-item [button]="true" [detail]="false" *ngFor="let medicamento of medicamentosFiltrados">
+                      <ion-label (click)="selectSuggestion(medicamento.nombre)">{{ medicamento.nombre }}</ion-label>
+                    </ion-item>
+                  </ion-list>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-input [(ngModel)]="dias" name="dias" type="number" label="Días" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio" required></ion-input>
+                  <ion-item>
+                    <ion-input [(ngModel)]="tiempoIngresado" name="tiempoIngresado" type="number" label="Ingrese el tiempo en horas:" label-placement="floating" fill="outline" required></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-input [(ngModel)]="dias" name="dias" type="number" label="Días" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio" required></ion-input>
+                  </ion-item>
                 </ion-col>
               </ion-row>
               <ion-row>

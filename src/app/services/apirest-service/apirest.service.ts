@@ -16,7 +16,7 @@ export class ApirestService {
       'Access-Control-Allow-Origin':'*'
     })
   }
-  apiUrl = 'https://jsonplaceholder.typicode.com';
+  apiUrl = 'https://my-json-server.typicode.com/franpvp/fakemedapi';
 
   // CONJUNTO DE INFORMACION SIN FILTRAR
   getPosts():Observable<any> {
@@ -46,4 +46,5 @@ export class ApirestService {
   deletePost(id: number):Observable<any> {
     return this.httpClient.delete(this.apiUrl + '/posts/' +id, this.httpOptions)
   }
+
 }

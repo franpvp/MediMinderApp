@@ -14,6 +14,14 @@ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 // Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {NgFor, AsyncPipe} from '@angular/common';
+
+
+
 @NgModule({
     declarations: [AppComponent],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, NativeStorage],
@@ -23,7 +31,13 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
         IonicModule.forRoot(),
         AppRoutingModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatAutocompleteModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        NgFor,
+        AsyncPipe
     ]
 })
 export class AppModule {}

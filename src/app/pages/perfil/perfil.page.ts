@@ -4,6 +4,7 @@ import { DbService } from 'src/app/services/db-service/db.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Camera, CameraResultType, CameraOptions } from '@capacitor/camera';
+import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
 
 @Component({
   selector: 'app-perfil',
@@ -50,8 +51,9 @@ export class PerfilPage implements OnInit {
       })
     })
   }
-
-
+  
+  
+  // MÉTODO PARA TOMAR Y OBTENER UNA FOTO
   async takePicture() {
     let options:CameraOptions = {
       quality: 100,

@@ -7,9 +7,6 @@
         <ion-card-header>
           <ion-avatar>
             <img *ngIf="src !== ''; else noImage" [src]="src"/>
-            <button class="btn-foto" (click)="takePicture()">
-              <ion-label class="select-message">Subir foto</ion-label>
-            </button>
           </ion-avatar>
           <ng-template #noImage>
             <ion-avatar>

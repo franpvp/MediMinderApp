@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonPopover, IonSearchbar } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { RecordatorioService } from '../../services/recordatorio-service/recordatorio.service';
 import { DbService } from 'src/app/services/db-service/db.service';
+import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
+
+
 
 @Component({
   selector: 'app-add-rec',
@@ -24,7 +27,15 @@ export class AddRecPage implements OnInit {
 
   recordatorios: string[] = [];
 
-  constructor(private router: Router, private alertController: AlertController,private recordatorioService: RecordatorioService, private dbService: DbService) { 
+  medicamentos: any[] = [];
+  medicamentosFiltrados: any[] = [];
+  showSuggestions: boolean = false;
+
+  @ViewChild('buscador') searchBar!: IonSearchbar;
+
+  @ViewChild('popoverOptions', { static: false }) popoverOptions!: IonPopover;
+
+  constructor(private router: Router, private alertController: AlertController,private recordatorioService: RecordatorioService, private dbService: DbService, private api: ApirestService) { 
     this.tiempoRestante = '';
     this.tiempoIngresado = 0;
     this.nombreMedicamento = '';
@@ -33,9 +44,11 @@ export class AddRecPage implements OnInit {
     this.mensajeHoras = '';
     this.mensajeDias = '';
     this.mensajeTiempo = '';    
+
   }
 
   ngOnInit() {
+    this.getPosts();
   }
 
   iniciarTemporizador(formulario: NgForm) {
@@ -69,7 +82,6 @@ export class AddRecPage implements OnInit {
         this.router.navigate(['/home']);
       }, 1000);
     });
-
   }
 
   async mostrarAlerta() {
@@ -95,7 +107,6 @@ export class AddRecPage implements OnInit {
       ],
       buttons: ['OK']
     });
-
     await alert.present();
   }
 
@@ -112,7 +123,6 @@ export class AddRecPage implements OnInit {
       ],
       buttons: ['OK']
     });
-
     await alerta.present();
   }
 
@@ -146,4 +156,39 @@ export class AddRecPage implements OnInit {
     // Enviar la información de la alerta a través del servicio
     this.recordatorioService.enviarAlerta(informacionAlerta);
   }
+
+  // OBTENER LOS OBJETOS CREADOS
+  getPosts() {
+    return this.api.getPosts().subscribe((res) => {
+      this.medicamentos = res;
+      console.log('OBTUVE MED: ', res);
+      console.log(res);
+    }, error => {
+      console.log('ERROR AL OBTENER MEDICAMENTOS: ', error);
+    })
+  }
+
+  // BUSQUEDA DE MEDICAMENTOS
+  buscarMedicamento(event: any) {
+    if(event.target.value === '') { 
+      this.showSuggestions = false;
+    } else {
+      this.showSuggestions = true;
+      const query = event.target.value.toLowerCase();
+        // Realiza el filtro de acuerdo a la letra ingresada
+      this.medicamentosFiltrados = this.medicamentos.filter((medicamento) =>
+          medicamento.nombre.toLowerCase().indexOf(query) > -1
+      );
+    }
+  }
+
+  selectSuggestion(medicamento: string) {
+    this.showSuggestions = false;
+    this.searchBar.value = medicamento;
+  } 
+
+      
+    
+    
+  
 }
