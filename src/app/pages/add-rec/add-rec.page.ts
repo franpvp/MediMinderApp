@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonPopover, IonSearchbar } from '@ionic/angular';
+import { AlertController, IonPopover, IonSearchbar, ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 
 // SERVICIOS
@@ -18,19 +18,18 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 })
 export class AddRecPage implements OnInit {
 
-  nombreMedicamento: string;
-  nameMed: string;
-  tiempoRestante: string;
+  nombreMedicamento: string = '';
+  nameMed: string = '';
+  tiempoRestante: string = '';
   temporizador: any;
-  tiempoIngresado: number;
-  dias: number;
-  mensajeMed: string;
-  mensajeHoras: string;
-  mensajeDias: string;
-  mensajeTiempo: string;
+  tiempoIngresado!: number;
+  dias!: number;
+  mensajeMed: string = '';
+  mensajeHoras: string = '';
+  mensajeDias: string = '';
+  mensajeTiempo: string = '';
 
   recordatorios: string[] = [];
-
   medicamentos: any[] = [];
   medicamentosFiltrados: any[] = [];
   showSuggestions: boolean = false;
@@ -40,17 +39,7 @@ export class AddRecPage implements OnInit {
 
   @ViewChild('popoverOptions', { static: false }) popoverOptions!: IonPopover;
 
-  constructor(private router: Router, private alertController: AlertController,private recordatorioService: RecordatorioService, private dbService: DbService, private myPerfilService: MyPerfilService, private api: ApirestService,private nativeStorage: NativeStorage) { 
-    this.tiempoRestante = '';
-    this.tiempoIngresado = 0;
-    this.nombreMedicamento = '';
-    this.dias = 0;
-    this.mensajeMed = '';
-    this.mensajeHoras = '';
-    this.mensajeDias = '';
-    this.mensajeTiempo = '';
-    this.nameMed = '';    
-
+  constructor(private router: Router, private toastController: ToastController ,private alertController: AlertController,private recordatorioService: RecordatorioService, private dbService: DbService, private myPerfilService: MyPerfilService, private api: ApirestService,private nativeStorage: NativeStorage) { 
   }
 
   ngOnInit() {
@@ -187,53 +176,72 @@ export class AddRecPage implements OnInit {
   // MÉTODO PARA GUARDAR DATOS
   guardarDatos(nombreMedIng: string, tiempoIng: number, diasIng: number) {
     this.nativeStorage.getItem('recordatoriosPorUsuario').then((data) => {
-      const recordatorio = {
-        id: 1,
-        nombreMed: nombreMedIng,
-        tiempoIng: String(tiempoIng),
-        dias: String(diasIng)
-      };
-      let recordatoriosPorUsuario = data || {}; // Si no hay datos, crea un objeto vacío
-      const usuario = this.myPerfilService.getUsuario();
-      console.log('USUARIO RECORDATORIO: ', usuario);
-      if (!recordatoriosPorUsuario[usuario]) {
-        recordatoriosPorUsuario[usuario] = []; // Crea una nueva lista para el usuario actual
-      }
-      const lista = recordatoriosPorUsuario[usuario]; // Obtén la lista de recordatorios para el usuario actual
-
-      if (lista.length > 0) {
-        const ultimoObjeto = lista[lista.length - 1];
-        recordatorio.id = ultimoObjeto.id + 1; // Incrementa el valor de id basado en el último objeto de la lista
-      }
-
-      lista.push(recordatorio);
+      if(tiempoIng != 0 && diasIng != 0) {
+        const recordatorio = {
+          id: 1,
+          nombreMed: nombreMedIng,
+          tiempoIng: String(tiempoIng),
+          dias: String(diasIng)
+        };
+        let recordatoriosPorUsuario = data || {}; // Si no hay datos, crea un objeto vacío
+        const usuario = this.myPerfilService.getUsuario();
+        console.log('USUARIO RECORDATORIO: ', usuario);
+        if (!recordatoriosPorUsuario[usuario]) {
+          recordatoriosPorUsuario[usuario] = []; // Crea una nueva lista para el usuario actual
+        }
+        const lista = recordatoriosPorUsuario[usuario]; // Obtén la lista de recordatorios para el usuario actual
   
-      // recordatoriosPorUsuario[usuario].push(recordatorio); // Agrega el nuevo recordatorio a la lista
+        if (lista.length > 0) {
+          const ultimoObjeto = lista[lista.length - 1];
+          recordatorio.id = ultimoObjeto.id + 1; // Incrementa el valor de id basado en el último objeto de la lista
+        }
   
-      this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
-        console.log('Recordatorio guardado exitosamente');
-      }).catch((error) => {
-        console.log('Error al guardar el recordatorio: ', error);
-      });
+        lista.push(recordatorio);
+    
+        // recordatoriosPorUsuario[usuario].push(recordatorio); // Agrega el nuevo recordatorio a la lista
+    
+        this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
+          console.log('Recordatorio guardado exitosamente');
+        }).catch((error) => {
+          console.log('Error al guardar el recordatorio: ', error);
+        });
+      }else {
+        this.presentToast('Ingreso inválido');
+      }
+      
     }).catch((error) => {
       console.log('Error al obtener los recordatorios por usuario: ', error);
       const usuario = this.myPerfilService.getUsuario();
-      const recordatorio = {
-        id: 1,
-        nombreMed: nombreMedIng,
-        tiempoIng: String(tiempoIng),
-        dias: String(diasIng)
-      };
-      let recordatoriosPorUsuario = {
-        [usuario]: [recordatorio]
-      };
-      // Guarda la lista en NativeStorage
-      this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
-        console.log('Datos guardados exitosamente');
-      }).catch((error) => {
-        console.log('Error al guardar los datos: ', error);
-      });
+      if(tiempoIng != 0 && diasIng != 0) {
+        const recordatorio = {
+          id: 1,
+          nombreMed: nombreMedIng,
+          tiempoIng: String(tiempoIng),
+          dias: String(diasIng)
+        };
+        let recordatoriosPorUsuario = {
+          [usuario]: [recordatorio]
+        };
+        // Guarda la lista en NativeStorage
+        this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
+          console.log('Datos guardados exitosamente');
+        }).catch((error) => {
+          console.log('Error al guardar los datos: ', error);
+        });
+      }else {
+        this.presentToast('Ingreso inválido');
+      }
     });
+  }
+
+  // Mensaje toast
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      cssClass: 'toast-centered'
+    });
+    toast.present();
   }
   
 }

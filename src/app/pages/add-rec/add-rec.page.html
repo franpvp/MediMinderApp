@@ -17,7 +17,7 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-input #buscador [(ngModel)]="nombreMedicamento" name="nombreMedicamento" [debounce]="500" (ionInput)="buscarMedicamento($event)" label="Medicamento" label-placement="floating" placeholder="Ingrese medicamento: "></ion-input>
+                    <ion-input #buscador [(ngModel)]="nombreMedicamento" name="nombreMedicamento" [debounce]="500" (ionInput)="buscarMedicamento($event)" label="Medicamento" label-placement="floating" placeholder="Ingrese medicamento"></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -33,14 +33,14 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-input [(ngModel)]="tiempoIngresado" name="tiempoIngresado" type="number" label="Ingrese el tiempo en horas:" label-placement="floating" fill="outline" required></ion-input>
+                    <ion-input [(ngModel)]="tiempoIngresado" name="tiempoIngresado" type="number" label="Ingrese el tiempo en horas:" label="Tiempo intervalo" label-placement="floating" fill="outline" placeholder="Ingrese intervalo de tiempo" required></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-input [(ngModel)]="dias" name="dias" type="number" label="Días" label-placement="floating" fill="outline" placeholder="Ingrese nombre del recordatorio" required></ion-input>
+                    <ion-input [(ngModel)]="dias" name="dias" type="number" label="Días" label-placement="floating" fill="outline" placeholder="Ingrese duración" required></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
