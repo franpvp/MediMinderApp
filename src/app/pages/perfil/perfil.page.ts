@@ -23,7 +23,6 @@ export class PerfilPage implements OnInit {
   src: string = '';
 
   constructor(private dbService: DbService, private route: ActivatedRoute, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
-      this.obtenerDatosPerfil();
    }
 
   ngOnInit() {
@@ -31,10 +30,12 @@ export class PerfilPage implements OnInit {
     this.obtenerImagenUsuarioLogeado(usuario).then((imagenDataUrl) => {
       this.src = imagenDataUrl || '';
     });
+    this.obtenerDatosPerfil();
   }
   // MÉTODO PARA OBTENER DATOS ALMACENADOS EN TABLA PERFIL
   obtenerDatosPerfil() {
     this.dbService.createDatabase().then(() => {
+      this.dbService.obtenerDatosUsuario(this.myPerfilService.getUsuario())
       let usuario = this.myPerfilService.getUsuario();
       this.dbService.obtenerDatosPerfil(usuario)
       .then((data) => {
@@ -46,7 +47,7 @@ export class PerfilPage implements OnInit {
           this.apellido = row.apellido;
           this.correo = row.correo;
           this.celular = row.celular;
-          
+          console.log('DATA USUARIO REGISTRADO: ', data)
         } else {
           console.log('NO HAY DATOS DEL USUARIO');
         }
@@ -55,24 +56,6 @@ export class PerfilPage implements OnInit {
       })
     })
   }
-  
-  
-  // MÉTODO PARA TOMAR Y OBTENER UNA FOTO
-  // async takePicture() {
-  //   let options:CameraOptions = {
-  //     quality: 100,
-  //     resultType: CameraResultType.DataUrl,
-  //     saveToGallery: true
-  //   }
-  //   Camera.getPhoto(options).then((result) => {
-  //     if(result.dataUrl) {
-  //       this.src = result.dataUrl
-  //     }
-      
-  //   }).catch(error => {
-  //     console.log('Se ha cancelado seleccion');
-  //   })
-  // }
 
   async guardarImagenUsuarioLogeado(usuario: string) {
     let options: CameraOptions = {
@@ -118,13 +101,6 @@ export class PerfilPage implements OnInit {
         return '';
       });
   }
-
-  
-
-
-  
-
-  
 
 
 }

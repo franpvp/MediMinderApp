@@ -13,8 +13,6 @@ import { ApirestService } from 'src/app/services/apirest-service/apirest.service
 })
 export class HomePage implements OnInit{
 
-
-
   constructor(private menuController : MenuController) {
   }
 

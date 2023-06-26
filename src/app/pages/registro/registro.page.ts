@@ -46,7 +46,7 @@ export class RegistroPage implements OnInit {
       this.hidePassword = !this.hidePassword;
     } 
   }
-  constructor(private router: Router, private dbService: DbService, private toastController: ToastController) { 
+  constructor(private router: Router, private dbService: DbService, private toastController: ToastController, private myPerfilService: MyPerfilService) { 
     
   }
 
@@ -62,6 +62,7 @@ export class RegistroPage implements OnInit {
       if(password == confPassword && password != '' && confPassword != '') {
         this.dbService.createDatabase().then(() => {
           this.guardarDatosUsuario(usuario,password);
+          this.myPerfilService.setUsuario(usuario);
         });
       }
       else {

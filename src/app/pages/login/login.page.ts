@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
     if(usuario != '' && contrasena != ''){
       this.dbService.createDatabase()
       .then(() => {
-        this.dbService.obtenerDatosUsuario(usuario, contrasena)
+        this.dbService.obtenerDatosUsuario(usuario)
         .then((data) => {
           console.log('DATA: ', data);
           if(data.rows.length > 0) {

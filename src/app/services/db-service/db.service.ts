@@ -44,9 +44,9 @@ export class DbService {
     });
   }
   // MÉTODO PARA OBTENER LOS DATOS ALMACENADOS EN TABLA USUARIO
-  async obtenerDatosUsuario(usuario: string, contrasena: string) { 
+  async obtenerDatosUsuario(usuario: string) { 
     return this.database.executeSql(
-      `SELECT * FROM USUARIO WHERE username = ? AND contrasena = ?`, [usuario, contrasena]
+      `SELECT * FROM USUARIO WHERE username = ?`, [usuario]
     ).then((data) => {
       return data;
     }).catch(error => {

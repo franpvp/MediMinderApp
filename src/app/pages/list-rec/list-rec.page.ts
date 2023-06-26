@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DbService } from '../../services/db-service/db.service';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,11 +37,33 @@ export class ListRecPage implements OnInit {
   }
 
   // Método para borrar datos
-  borrarDatos() {
-    this.nativeStorage.remove("recordatoriosPorUsuario").then(() => {
-      alert('ITEM BORRADO');
+  borrarDatos(id: number) {
+    this.nativeStorage.getItem('recordatoriosPorUsuario').then((data) => {
+      const usuario = this.myPerfilService.getUsuario();
+      const recordatoriosPorUsuario = data || {};
+      const listaRecordatorios = recordatoriosPorUsuario[usuario] || [];
+      const index = listaRecordatorios.findIndex((recordatorio: { id: number; }) => recordatorio.id === id);
+      if (index !== -1) {
+        listaRecordatorios.splice(index, 1);
+        recordatoriosPorUsuario[usuario] = listaRecordatorios;
+        this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
+          console.log('ITEM BORRADO');
+          this.obtenerDatos(usuario); // Actualizar la lista después de borrar el objeto
+        }).catch((error) => {
+          console.log('ERROR AL BORRAR EL ITEM: ', error);
+        });
+      }
+    }).catch((error) => {
+      console.log('ERROR AL OBTENER LA DATA: ', error);
     });
   }
+  
+  
+  
+  
+  
+  
+  
 
 
 
