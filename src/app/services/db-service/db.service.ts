@@ -42,54 +42,6 @@ export class DbService {
     }).catch(error => {
       console.log('ERROR AL CREAR TABLA PERFIL: ', error);
     });
-    // TABLA RECORDATORIO
-    await this.database.executeSql(
-      `CREATE TABLE IF NOT EXISTS RECORDATORIO(id INTEGER PRIMARY KEY autoincrement, nombreMed VARCHAR(30) NOT NULL, tiempoIng VARCHAR(2) NOT NULL, duracionDias VARCHAR(4) NOT NULL)`,[]
-    ).then(() => {
-      console.log('TABLA RECORDATORIO CREADA');
-    }).catch(error => {
-      console.log('ERROR AL CREAR TABLA RECORDATORIO: ', error);
-    });
-  }
-  // MÉTODO PARA AGREGAR UN RECORDATORIO
-  async agregarRecordatorio(nombreMed: string, tiempoIng: string, duracionDias: string) {
-    return this.database.executeSql(
-      `INSERT INTO RECORDATORIO(nombreMed, tiempoIng, duracionDias) VALUES(?, ?, ?)`, [nombreMed, tiempoIng, duracionDias]
-    ).then(() => {
-      console.log('RECORDATORIO AGREGADO');
-    }).catch(error => {
-      console.log('ERROR AL AGREGAR RECORDATORIO: ', error);
-    })
-  }
-  // MÉTODO PARA OBTENER LISTA DE RECORDATORIOS
-  async obtenerRecordatorio() {
-    return this.database.executeSql(
-      `SELECT * FROM RECORDATORIO`, []
-    ).then((data) => {
-      return data;
-    }).catch(error => {
-      console.log('ERROR AL OBTENER DATOS DE RECORDATORIOS: ', error);
-    })
-  }
-  // MÉTODO PARA BORRAR RECORDATORIO
-  async borrarRecordatorio(id: number) {
-    return this.database.executeSql(
-      `DELETE FROM RECORDATORIO WHERE id = ?`, [id]
-    ).then(() => {
-      console.log('RECORDATORIO ELIMINADO');
-    }).catch(error => {
-      console.log('ERROR AL ELIMINAR RECORDATORIO: ', error);
-    })
-  }
-  // MÉTODO PARA MODIFICAR RECORDATORIO
-  async modificarRecordatorio(nombreMed: string, tiempoIng: string, duracionDias: string, id: number) {
-    return this.database.executeSql(
-      `UPDATE RECORDATORIO SET nombreMed = ?, tiempoIng = ?, duracionDias = ? WHERE id = ?`, [nombreMed, tiempoIng, duracionDias, id]
-    ).then(() => {
-      console.log('SE HA ACTUALIZADO EL RECORDATORIO');
-    }).catch(error => {
-      console.log('ERROR AL MODIFICAR RECORDATORIO: ', error);
-    })
   }
   // MÉTODO PARA OBTENER LOS DATOS ALMACENADOS EN TABLA USUARIO
   async obtenerDatosUsuario(usuario: string, contrasena: string) { 

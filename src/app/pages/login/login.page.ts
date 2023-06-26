@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 import { DbService } from '../../services/db-service/db.service';
+import { ToastController } from '@ionic/angular';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginPage implements OnInit {
   mostrarMensaje: boolean = false;
   textoVacio: boolean = false;
 
-  constructor(private router: Router, private dbService: DbService, private myPerfilService: MyPerfilService) { }
+  estaLogeado: boolean = false;
+
+  constructor(private router: Router, private dbService: DbService, private myPerfilService: MyPerfilService, private toastController: ToastController, private nativeStorage: NativeStorage) { }
 
   ngOnInit() {
   }
@@ -44,10 +48,8 @@ export class LoginPage implements OnInit {
       .then(() => {
         this.dbService.obtenerDatosUsuario(usuario, contrasena)
         .then((data) => {
-          console.log('LLEGUÉ AQUI ANTES DEL IF');
           console.log('DATA: ', data);
           if(data.rows.length > 0) {
-            console.log('LLEGUÉ AQUI');
             let datosUsuario = data.rows.item(0);
             console.log('DATOS USUARIO: ', datosUsuario);
             let usuarioDb = datosUsuario.username;
@@ -65,6 +67,8 @@ export class LoginPage implements OnInit {
                 // SETEAR DATOS EN PERFIL SERVICE
                 this.myPerfilService.setUsuario(usuario);
                 this.router.navigate(['/home'], navigationExtras);
+                this.estaLogeado = true;
+                this.guardarEstadoSesion();
                 this.showSpinner = false;
               }, 1500);
               console.log('CREDENCIALES CORRECTAS');
@@ -72,22 +76,40 @@ export class LoginPage implements OnInit {
               this.mostrarMensaje = true;
             }
           } else {
+            this.presentToast('Nombre de usuario o contraseña incorrectos.');
             console.log('NO SE HA ENCONTRADO USUARIO');
           }
         }).catch(error => {
           console.log('ERROR AL OBTENER DATOS: ', error);
         });
-        
       }).catch(error => {
         console.log('ERROR AL ABRIR LA BASE DE DATOS: ', error);
-        
       }) 
-    
     }
-    
   }
+
+  guardarEstadoSesion() {
+    this.nativeStorage.setItem('estadoSesion', { estaLogeado: this.estaLogeado })
+    .then(() => {
+      console.log('Estado de sesión guardado correctamente', this.estaLogeado);
+    }).catch((error) => {
+      console.log('Error al guardar el estado de sesión: ', error);
+    })
+  }
+
+
   resetearDiv() {
     this.mostrarMensaje = false;
+  }
+
+  // Mensaje toast
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      cssClass: 'toast-centered'
+    });
+    toast.present();
   }
 
 }

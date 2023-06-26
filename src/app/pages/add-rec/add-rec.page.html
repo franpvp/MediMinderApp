@@ -17,7 +17,7 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
-                    <ion-input #buscador [debounce]="1000" (ionInput)="buscarMedicamento($event)" animated="true" label="Medicamento" label-placement="floating" placeholder="Ingrese medicamento"></ion-input>
+                    <ion-input #buscador [(ngModel)]="nombreMedicamento" name="nombreMedicamento" [debounce]="500" (ionInput)="buscarMedicamento($event)" label="Medicamento" label-placement="floating" placeholder="Ingrese medicamento: "></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
@@ -46,7 +46,7 @@
               </ion-row>
               <ion-row>
                 <ion-col class="ion-text-center">
-                  <ion-button type="submit" [disabled]="!formulario.valid">Confirmar</ion-button>
+                  <ion-button type="submit" (click)="guardarDatos(nameMed, tiempoIngresado, dias)" [disabled]="!formulario.valid">Confirmar</ion-button>
                 </ion-col>
               </ion-row>
             </form>

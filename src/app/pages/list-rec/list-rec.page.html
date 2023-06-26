@@ -6,41 +6,42 @@
       <ion-col class="ion-text-center">
         <ion-card class="ion-text-center">
           <ion-card-header>
-            <ion-card-title>
-              Registro Recordatorios
-            </ion-card-title>
+            <ion-text color="primary">
+              <h1 class="ion-text-center">Recordatorios Creados</h1>
+            </ion-text>
           </ion-card-header>
           <ion-card-content>
             <mat-accordion>
-              <ng-container *ngIf="listaRec > 0; else noRecordatorios">
+              <ng-container *ngIf="listaNativeStorage && listaNativeStorage.length > 0; else noRecordatorios">
               </ng-container>
               <ng-template #noRecordatorios>
                 <p>No hay recordatorios.</p>
               </ng-template>
-              
-              <mat-expansion-panel hideToggle *ngFor="let recordatorio of listaRec; let i = index">
+              <mat-expansion-panel hideToggle *ngFor="let recordatorio of listaNativeStorage">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    Recordatorio {{ numbers[i] }}
+                    Recordatorio {{ recordatorio.id }}
                   </mat-panel-title>
                   <mat-panel-description class="ion-text-center">
                     Click para mas detalles
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <p>{{ recordatorio.nombreMed }}</p>
-                <p>{{ recordatorio.tiempoIng }}</p>
-                <p>{{ recordatorio.duracionDias }}</p>
+                <ion-card>
+                  <ion-card-content>
+                    <ion-card-subtitle>Medicamento: {{ recordatorio.nombreMed }}</ion-card-subtitle>
+                    <ion-card-subtitle>Cada: {{ recordatorio.tiempoIng }} horas </ion-card-subtitle>
+                    <ion-card-subtitle>Duración: {{ recordatorio.dias }} días</ion-card-subtitle>
+                  </ion-card-content>
+                </ion-card>
               </mat-expansion-panel>            
             </mat-accordion>
-
             <ion-item-options side="end">
               <ion-item-option color="danger">
               </ion-item-option>
             </ion-item-options>
-
           </ion-card-content>
           <ion-card-content style="display: flex; justify-content: center;">
-            <button [routerLink]="['/add-rec']" routerLinkActive="router-link-active"  class="botonRedondo">
+            <button [routerLink]="['/add-rec']" class="botonRedondo">
               <ion-icon name="add"></ion-icon>
             </button>
           </ion-card-content>

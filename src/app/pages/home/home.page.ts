@@ -13,7 +13,9 @@ import { ApirestService } from 'src/app/services/apirest-service/apirest.service
 })
 export class HomePage implements OnInit{
 
-  constructor(private menuController : MenuController, private nativeStorage: NativeStorage, private api: ApirestService) {
+
+
+  constructor(private menuController : MenuController) {
   }
 
   ngOnInit() {
@@ -22,28 +24,5 @@ export class HomePage implements OnInit{
   closeMenu() {
     this.menuController.enable(true, 'main-content');
   }
-  
-  // Método para guardar los datos
-  guardarDatos() {
-    this.nativeStorage.setItem("myitem", {id:"1", name:"fran"})
-    .then(() => {
-      alert("DATOS GUARDADOS")
-    }).catch(error => {
-      console.log('DATOS NO GUARDADOS: ', error);
-    });
-  }
-  // Método para obtener datos
-  obtenerDatos() {
-    this.nativeStorage.getItem('myitem').then((data) => {
-      console.log(data),
-      (error: any) => console.log(error);
-    });
-  }
 
-  // Método para borrar datos
-  borrarDatos() {
-    this.nativeStorage.remove("myitem").then(() => {
-      alert('ITEM BORRADO');
-    });
-  }
 }

@@ -110,20 +110,20 @@
             <!-- Input Contraseña -->
             <ion-row>
               <ion-col size="10">
-                <ion-label position="floating">Contraseña</ion-label>
                 <ion-input
                   type="{{ hidePassword ? 'password' : 'text' }}"
                   name="contraseña"
                   [(ngModel)]="password"
                   (input)="resetearDiv()"
+                  label="Contraseña"
+                  label-placement="floating"
                   placeholder="Ingrese contraseña"
-                  helper-text=" * La contraseña debe tener al menos una letra mayúscula, un dígito y un largo mínimo de 8 caracteres y máximo de 15."
                   pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,15}$"
                   error-text="Incluya mayúscula, y un dígito numérico."
                   required>
                 </ion-input>
               </ion-col>
-              <ion-col size="2" class="icono">
+              <ion-col size="1" class="icono">
                 <div class="ion-text-center">
                   <ion-buttons slot="end">
                     <ion-button (click)="togglePasswordVisibility('password')" style="vertical-align: middle;">
