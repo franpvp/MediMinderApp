@@ -145,7 +145,9 @@
                   name="confirmarContraseña"
                   [(ngModel)]="confPassword"
                   (input)="resetearDiv()"
-                  placeholder="Confirmar contraseña"
+                  label="Confirmar contraseña"
+                  label-placement="floating"
+                  placeholder="Repita contraseña"
                   error-text="Deben coincidir las contraseñas."
                   required>
                 </ion-input>
