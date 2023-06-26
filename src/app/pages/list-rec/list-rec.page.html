@@ -28,9 +28,17 @@
                 </mat-expansion-panel-header>
                 <ion-card>
                   <ion-card-content>
-                    <ion-card-subtitle>Medicamento: {{ recordatorio.nombreMed }}</ion-card-subtitle>
-                    <ion-card-subtitle>Cada: {{ recordatorio.tiempoIng }} horas </ion-card-subtitle>
-                    <ion-card-subtitle>Duración: {{ recordatorio.dias }} días</ion-card-subtitle>
+                    <ion-list>
+                      <ion-item>
+                        Medicamento: {{ recordatorio.nombreMed }}
+                      </ion-item>
+                      <ion-item>
+                        Cada: {{ recordatorio.tiempoIng }} horas
+                      </ion-item>
+                      <ion-item>
+                        Duración: {{ recordatorio.dias }} días
+                      </ion-item>
+                    </ion-list>
                   </ion-card-content>
                 </ion-card>
               </mat-expansion-panel>            

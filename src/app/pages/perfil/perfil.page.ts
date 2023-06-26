@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Camera, CameraResultType, CameraOptions } from '@capacitor/camera';
 import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-perfil',
@@ -19,14 +20,17 @@ export class PerfilPage implements OnInit {
   correo: string = '';
   celular: string = '';
 
-  src: string = "";
+  src: string = '';
 
-  constructor(private dbService: DbService, private route: ActivatedRoute, private myPerfilService: MyPerfilService) {
+  constructor(private dbService: DbService, private route: ActivatedRoute, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
       this.obtenerDatosPerfil();
    }
 
   ngOnInit() {
-    
+    const usuario = this.myPerfilService.getUsuario();
+    this.obtenerImagenUsuarioLogeado(usuario).then((imagenDataUrl) => {
+      this.src = imagenDataUrl || '';
+    });
   }
   // MÉTODO PARA OBTENER DATOS ALMACENADOS EN TABLA PERFIL
   obtenerDatosPerfil() {
@@ -54,21 +58,68 @@ export class PerfilPage implements OnInit {
   
   
   // MÉTODO PARA TOMAR Y OBTENER UNA FOTO
-  async takePicture() {
-    let options:CameraOptions = {
+  // async takePicture() {
+  //   let options:CameraOptions = {
+  //     quality: 100,
+  //     resultType: CameraResultType.DataUrl,
+  //     saveToGallery: true
+  //   }
+  //   Camera.getPhoto(options).then((result) => {
+  //     if(result.dataUrl) {
+  //       this.src = result.dataUrl
+  //     }
+      
+  //   }).catch(error => {
+  //     console.log('Se ha cancelado seleccion');
+  //   })
+  // }
+
+  async guardarImagenUsuarioLogeado(usuario: string) {
+    let options: CameraOptions = {
       quality: 100,
       resultType: CameraResultType.DataUrl,
       saveToGallery: true
-    }
-    Camera.getPhoto(options).then((result) => {
-      if(result.dataUrl) {
-        this.src = result.dataUrl
+    };
+    try {
+      const result = await Camera.getPhoto(options);
+      if (result.dataUrl) {
+        this.src = result.dataUrl;
+        const claveImagen = `imagen_${usuario}`;
+        // Guardar la imagen seleccionada en nativeStorage
+        await this.nativeStorage.setItem(claveImagen, this.src)
+        .then(() => {
+          console.log('Imagen guardada exitosamente para el usuario:', usuario);
+          console.log(this.src);
+        })
+        .catch((error) => {
+          console.log('Error al guardar la imagen para el usuario:', usuario, error);
+        });
       }
-      
-    }).catch(error => {
-      console.log('Se ha cancelado seleccion');
-    })
+    } catch (error) {
+      console.log('Error al seleccionar la imagen: ', error);
+    }
   }
+
+  obtenerImagenUsuarioLogeado(usuario: string): Promise<string> {
+    const claveImagen = `imagen_${usuario}`;
+    return this.nativeStorage.getItem(claveImagen)
+      .then((data) => {
+        if (data) {
+          const imagenDataUrl = data as string;
+          console.log('Imagen obtenida exitosamente para el usuario:', usuario);
+          return imagenDataUrl;
+        } else {
+          console.log('No se encontró la imagen para el usuario:', usuario);
+          return '';
+        }
+      })
+      .catch((error) => {
+        console.log('Error al obtener la imagen para el usuario:', usuario, error);
+        return '';
+      });
+  }
+
+  
 
 
   

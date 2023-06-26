@@ -7,14 +7,14 @@
         <ion-card-header>
           <ion-avatar>
             <img *ngIf="src !== ''; else noImage" [src]="src"/>
-            <button class="btn-foto" (click)="takePicture()">
+            <button class="btn-foto" (click)="guardarImagenUsuarioLogeado(usuario)">
               <ion-label class="select-message">Subir foto</ion-label>
             </button>
           </ion-avatar>
           <ng-template #noImage>
             <ion-avatar>
               <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              <button class="btn-foto" *ngIf="src === 'https://ionicframework.com/docs/img/demos/avatar.svg'" (click)="takePicture()">
+              <button class="btn-foto" *ngIf="src === 'https://ionicframework.com/docs/img/demos/avatar.svg'" (click)="guardarImagenUsuarioLogeado(usuario)">
                 <ion-label class="select-message">Subir foto</ion-label>
               </button>
             </ion-avatar>
