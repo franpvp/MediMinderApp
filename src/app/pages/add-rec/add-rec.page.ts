@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { AlertController, IonPopover, IonSearchbar, ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 
-// SERVICIOS
+// Servicios
 import { RecordatorioService } from '../../services/recordatorio-service/recordatorio.service';
 import { DbService } from 'src/app/services/db-service/db.service';
 import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
-
+// Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
@@ -148,6 +148,21 @@ export class AddRecPage implements OnInit {
       console.log('OBTUVE MED: ', res);
       console.log(res);
     }, error => {
+      const jsonData: any = [
+          { id: 1, nombre: 'Paracetamol' },
+          { id: 2, nombre: 'Ibuprofeno' },
+          { id: 3, nombre: 'Omeprazol' },
+          { id: 4, nombre: 'Amoxicilina' },
+          { id: 5, nombre: 'Loratadina' },
+          { id: 6, nombre: 'Atorvastatina' },
+          { id: 7, nombre: 'Metformina' },
+          { id: 8, nombre: 'Diazepam' },
+          { id: 9, nombre: 'Fluoxetina' },
+          { id: 10, nombre: 'Losartán' }
+      ];
+      this.nativeStorage.setItem('medicamentosDef', jsonData);
+      this.medicamentos = jsonData;
+      alert('ALERTA CODIGO 404 SE UTILIZAN MEDICAMENTOS GUARDADOS EN NATIVE STORAGE');
       console.log('ERROR AL OBTENER MEDICAMENTOS: ', error);
     })
   }
@@ -233,6 +248,9 @@ export class AddRecPage implements OnInit {
       }
     });
   }
+
+
+  
 
   // Mensaje toast
   async presentToast(mensaje: string) {

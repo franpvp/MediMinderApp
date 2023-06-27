@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+// Servicios
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 import { DbService } from '../../services/db-service/db.service';
-import { ToastController } from '@ionic/angular';
+// Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({

@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+// Servicios
 import { RecordatorioService } from '../../services/recordatorio-service/recordatorio.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { DbService } from '../../services/db-service/db.service';
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
-import { Router } from '@angular/router';
-
+// Native Storage
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-list-rec',

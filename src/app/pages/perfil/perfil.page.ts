@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+// Servicios
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 import { DbService } from 'src/app/services/db-service/db.service';
-import { ActivatedRoute } from '@angular/router';
-
+// Plugin Camera
 import { Camera, CameraResultType, CameraOptions } from '@capacitor/camera';
-import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
+// Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
@@ -22,7 +22,7 @@ export class PerfilPage implements OnInit {
 
   src: string = '';
 
-  constructor(private dbService: DbService, private route: ActivatedRoute, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
+  constructor(private dbService: DbService, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
    }
 
   ngOnInit() {
