@@ -11,11 +11,12 @@
         <ion-list>
           <form #myForm="ngForm">
             <ion-card-header class="ion-text-center">
-              <ion-title class="titulo-registro">Registro</ion-title>
+              <ion-title id="titulo-reg" class="titulo-registro">Registro</ion-title>
             </ion-card-header>
             <ion-row>
               <ion-col>
                 <ion-input
+                  id="usuario"
                   class="usuario"
                   name="nombreUsuario"
                   [(ngModel)]="usuario"
@@ -36,8 +37,9 @@
             <ion-row>
               <ion-col>
                 <ion-input
-                  type="text"
+                  id="nombre"
                   name="nombre"
+                  type="text"
                   [(ngModel)]="nombre"
                   (input)="resetearDiv()"
                   fill="outline"
@@ -54,8 +56,9 @@
             <ion-row>
               <ion-col>
                 <ion-input
-                  type="text"
+                  id="apellido"
                   name="apellido"
+                  type="text"
                   [(ngModel)]="apellido"
                   (input)="resetearDiv()"
                   fill="outline"
@@ -72,6 +75,7 @@
             <ion-row>
               <ion-col>
                 <ion-input
+                  id="correo"
                   type="text"
                   name="correo"
                   [(ngModel)]="correo"
@@ -90,7 +94,7 @@
              <ion-row>
               <ion-col>
                 <ion-input
-                  id="phone"
+                  id="celular"
                   type="tel"
                   [(ngModel)]="celular"
                   (input)="resetearDiv()"
@@ -111,15 +115,16 @@
             <ion-row>
               <ion-col size="10">
                 <ion-input
+                  id="contrasena"
                   type="{{ hidePassword ? 'password' : 'text' }}"
-                  name="contraseña"
+                  name="contrasena"
                   [(ngModel)]="password"
                   (input)="resetearDiv()"
                   label="Contraseña"
                   label-placement="floating"
                   placeholder="Ingrese contraseña"
                   pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,15}$"
-                  error-text="Incluya mayúscula, y un dígito numérico."
+                  error-text="Incluya mayúscula, un dígito numérico y rango entre 8 y 15 caracteres."
                   required>
                 </ion-input>
               </ion-col>
@@ -140,8 +145,9 @@
             <ion-row>
               <ion-col size="10">
                 <ion-input
+                  id="confirmarContrasena"
                   type="{{ hidePassword ? 'password' : 'text' }}"
-                  name="confirmarContraseña"
+                  name="confirmarContrasena"
                   [(ngModel)]="confPassword"
                   (input)="resetearDiv()"
                   label="Confirmar contraseña"
@@ -152,8 +158,8 @@
                 </ion-input>
               </ion-col>
             </ion-row>
-            <!-- Botón Ingresar -->
-            <ion-row class="ion-justify-content-center ion-align-items-center">
+            <!-- Botón Confirmar -->
+            <ion-row id="btnConfirmar" class="ion-justify-content-center ion-align-items-center">
               <ion-col>
                 <div class="ion-text-center">
                   <ion-button (click)="confirmar()" mat-raised-button shape="round" color="primary">Confirmar</ion-button>
