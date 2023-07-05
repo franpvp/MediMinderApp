@@ -26,7 +26,7 @@ export class Home {
     }
 
     navigateToHomePage(): promise.Promise<any> {
-        return browser.get('/');
+        return browser.get('/home');
     }
 
 }

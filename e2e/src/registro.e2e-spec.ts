@@ -15,48 +15,41 @@ describe('Registro Page', () => {
 
     it('Debería requerir un nombre de usuario válido', () => {
         registroPage.getInputUsuario().sendKeys('user123');
-        registroPage.clickConfirmarButton().click();
         expect(registroPage.getInputUsuario().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Debería requerir un nombre válido', () => {
-        registroPage.getNombre().sendKeys('francisca');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getNombre().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputNombre().sendKeys('francisca');
+        expect(registroPage.getInputNombre().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Debería requerir un apellido válido', () => {
-        registroPage.getApellido().sendKeys('valdivia');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getApellido().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputApellido().sendKeys('valdivia');
+        expect(registroPage.getInputApellido().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Debería requerir un correo válido', () => {
-        registroPage.getCorreo().sendKeys('fran@gmail.com');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getCorreo().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputCorreo().sendKeys('fran@gmail.com');
+        expect(registroPage.getInputCorreo().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Debería requerir un celular válido', () => {
-        registroPage.getCelular().sendKeys('francisca');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getCelular().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputCelular().sendKeys('francisca');
+        expect(registroPage.getInputCelular().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Debería requerir una contraseña válido', () => {
-        registroPage.getContrasena().sendKeys('francisca');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getContrasena().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputContrasena().sendKeys('francisca');
+        expect(registroPage.getInputContrasena().getAttribute('error-text')).toBeTruthy();
     });
 
     it('Deberían coincidir las contraseñas válido', () => {
-        registroPage.getConfirmarContrasena().sendKeys('Prueba123');
-        registroPage.clickConfirmarButton().click();
-        expect(registroPage.getConfirmarContrasena().getAttribute('error-text')).toBeTruthy();
+        registroPage.getInputConfirmarContrasena().sendKeys('Prueba123');
+        expect(registroPage.getInputConfirmarContrasena().getAttribute('error-text')).toBeTruthy();
     });
 
     it('El botón redirecciona al home', () => {
-        registroPage.clickConfirmarButton();
+        registroPage.clickRegistroConfirmarButton();
         expect(browser.getCurrentUrl()).toContain('/home');
     });
 })

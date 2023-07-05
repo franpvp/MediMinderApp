@@ -1,0 +1,11 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "outDir": "../out-tsc/e2e",
+      "module": "commonjs",
+      "types": ["jasmine", "node"],
+      "typeRoots": [
+        "../node_modules/@types"
+      ]
+    }
+  }
