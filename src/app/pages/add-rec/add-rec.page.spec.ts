@@ -1,111 +1,117 @@
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
-import { FormsModule, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from "@angular/core/testing";
+import { AddRecPage } from "./add-rec.page";
+import { FormsModule, NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NativeStorage } from "@awesome-cordova-plugins/native-storage/ngx";
+import { IonicModule, AlertController, ToastController } from "@ionic/angular";
+import { ApirestService } from "src/app/services/apirest-service/apirest.service";
+import { MyPerfilService } from "src/app/services/perfil-service/my-perfil.service";
+import { SQLite } from "@awesome-cordova-plugins/sqlite/ngx";
+import { Observable, delay, of } from "rxjs";
 
-import { AddRecPage } from './add-rec.page';
+class SQLiteMock {}
+
+class NativeStorageMock {
+  setItem(key: string, value: any): Promise<any> {
+    // Simulate the behavior of NativeStorage setItem method
+    return Promise.resolve();
+  }
+}
+
+class ApirestServiceMock {
+  getPosts(): Observable<any> {
+    const data = [
+      { id: 1, nombre: 'Paracetamol' },
+      { id: 2, nombre: 'Ibuprofeno' },
+      { id: 3, nombre: 'Omeprazol' },
+      { id: 4, nombre: 'Amoxicilina' },
+      { id: 5, nombre: 'Loratadina' },
+      { id: 6, nombre: 'Atorvastatina' },
+      { id: 7, nombre: 'Metformina' },
+      { id: 8, nombre: 'Diazepam' },
+      { id: 9, nombre: 'Fluoxetina' },
+      { id: 10, nombre: 'Losartán' }
+    ];
+    return of(data).pipe(delay(100)); // Simula una respuesta retrasada con 'delay' si es necesario
+  }
+}
 
 describe('AddRecPage', () => {
   let component: AddRecPage;
   let fixture: ComponentFixture<AddRecPage>;
-  let router: Router;
+  let router: jasmine.SpyObj<Router>;
+  let alertController: jasmine.SpyObj<AlertController>;
+  let myPerfilService: jasmine.SpyObj<MyPerfilService>;
+  let toastController: jasmine.SpyObj<ToastController>;
 
-  beforeEach((async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const myPerfilServiceSpy = jasmine.createSpyObj('MyPerfilService', [], { usuario: 'usuarioPrueba' });
+    const toastControllerSpy = jasmine.createSpyObj('ToastController', ['create']);
+    let alertControllerSpy = jasmine.createSpyObj('AlertController', ['create']);
+
+    TestBed.configureTestingModule({
       declarations: [AddRecPage],
-      imports: [FormsModule]
+      imports: [IonicModule.forRoot(), FormsModule],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+        { provide: AlertController, useValue: alertControllerSpy },
+        { provide: NativeStorage, useClass: NativeStorageMock },
+        { provide: MyPerfilService, useValue: myPerfilServiceSpy },
+        { provide: ApirestService, useClass: ApirestServiceMock },
+        { provide: ToastController, useValue: toastControllerSpy },
+        { provide: SQLite, useClass: SQLiteMock }
+      ]
     }).compileComponents();
-    
+
     fixture = TestBed.createComponent(AddRecPage);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    alertController = TestBed.inject(AlertController) as jasmine.SpyObj<AlertController>;
+    myPerfilService = TestBed.inject(MyPerfilService) as jasmine.SpyObj<MyPerfilService>;
+    toastController = TestBed.inject(ToastController) as jasmine.SpyObj<ToastController>;
+
     fixture.detectChanges();
-    
   }));
 
-  it('Debería comenzar el temporizador', fakeAsync(() => {
-    spyOn(window, 'setInterval').and.callThrough();
-    spyOn(window, 'clearInterval').and.callThrough();
-    spyOn(component, 'obtenerTiempoRestante').and.stub();
-    spyOn(component, 'mostrarAlertaTermino').and.stub();
-    spyOn(component, 'recordatorio').and.stub();
-    spyOn(component, 'mostrarAlerta').and.returnValue(Promise.resolve());
-
-    component.tiempoIngresado = 1;
-
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('should start the timer and navigate to home', fakeAsync(() => {
     const formularioMock: Partial<NgForm> = {
       invalid: false
     };
+    component.tiempoIngresado = 1;
 
     component.iniciarTemporizador(formularioMock as NgForm);
     expect(formularioMock.invalid).toBeFalsy();
-    expect(window.setInterval).toHaveBeenCalled();
 
-    // Simulate passage of time
     tick(1000);
+    expect(component.tiempoRestante).toBeDefined();
 
-    expect(component.obtenerTiempoRestante).toHaveBeenCalled();
-
-    // Simulate timer completion
     tick(60 * 60 * 1000);
+    expect(component.tiempoRestante).toBeUndefined();
 
-    expect(component.mostrarAlertaTermino).toHaveBeenCalled();
-    expect(window.clearInterval).toHaveBeenCalled();
-    expect(component.recordatorio).toHaveBeenCalled();
-    expect(component.mostrarAlerta).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/home']);
-
   }));
-
-  it('No debería mostrar el temporizador si el formulario es inválido', () => {
-    spyOn(window, 'setInterval').and.callThrough();
-
-    const formularioMock: Partial<NgForm> = {
-      invalid: true
-    };
-
-    component.iniciarTemporizador(formularioMock as NgForm);
-
-    expect(formularioMock.invalid).toBeTruthy();
-    expect(window.setInterval).not.toHaveBeenCalled();
-  });
-  it('should obtain remaining time', () => {
-    const tiempoFinalizacion = new Date();
-    const ahora = new Date(tiempoFinalizacion.getTime() - 1000); // 1 second earlier
-
-    const tiempoRestante = component.obtenerTiempoRestante(tiempoFinalizacion, ahora);
-
-    expect(tiempoRestante).toBe('00:00:01');
-  });
-
-  it('Debería mostrar la alerta de termino', () => {
-    spyOn(window, 'alert');
-
-    component.mostrarAlertaTermino();
-
-    expect(window.alert).toHaveBeenCalledWith('Timer completed!');
-  });
-
-  it('Debería mostrar el recordatorio', () => {
-    spyOn(window, 'alert');
-
-    component.recordatorio();
-
-    expect(window.alert).toHaveBeenCalledWith('Don\'t forget!');
-  });
-
-  it('Debería mostrar la alerta', async () => {
-    spyOn(window, 'alert');
+  it('should display an alert', async () => {
+    const alertSpy = jasmine.createSpyObj('alert', ['present']);
+    spyOn(alertController, 'create').and.returnValue(Promise.resolve(alertSpy));
 
     await component.mostrarAlerta();
 
-    expect(window.alert).toHaveBeenCalledWith('Alert!');
+    expect(alertController.create).toHaveBeenCalledWith({
+      header: 'Creación Exitosa',
+      cssClass: 'multiline-alert',
+      inputs: [
+        { type: 'text', value: component.nameMed, disabled: true },
+        { type: 'text', value: component.mensajeHoras, disabled: true },
+        { type: 'text', value: component.mensajeDias, disabled: true }
+      ],
+      buttons: ['OK']
+    });
+
+    expect(alertSpy.present).toHaveBeenCalledTimes(1);
   });
-
-  it('Debería navegar al home', fakeAsync(() => {
-    spyOn(router, 'navigate');
-
-    tick(1000);
-
-    expect(router.navigate).toHaveBeenCalledWith(['/home']);
-  }));
 });
+

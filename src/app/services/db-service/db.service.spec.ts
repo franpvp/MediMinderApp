@@ -4,23 +4,31 @@ import { DbService } from './db.service';
 
 describe('DbService', () => {
   let dbService: DbService;
-  let sqliteMock: jasmine.SpyObj<SQLite>;
+  let sqlite: jasmine.SpyObj<SQLite>;
+  let sqliteObject: jasmine.SpyObj<SQLiteObject>;
 
   beforeEach(() => {
     const sqliteSpy = jasmine.createSpyObj('SQLite', ['create']);
+    const sqliteObjectSpy = jasmine.createSpyObj('SQLiteObject', ['executeSql']);
+
     TestBed.configureTestingModule({
       providers: [
         DbService,
-        { provide: SQLite, useValue: sqliteSpy }
+        { provide: SQLite, useValue: sqliteSpy },
+        { provide: SQLiteObject, useValue: sqliteObjectSpy }
       ]
     });
     dbService = TestBed.inject(DbService);
-    sqliteMock = TestBed.inject(SQLite) as jasmine.SpyObj<SQLite>;
+    sqlite = TestBed.inject(SQLite) as jasmine.SpyObj<SQLite>;
+    sqliteObject = TestBed.inject(SQLiteObject) as jasmine.SpyObj<SQLiteObject>;
+
   });
 
   it('should create the database and tables', async () => {
+    const sqliteMock: jasmine.SpyObj<SQLite> = jasmine.createSpyObj('SQLite', ['create']);
     const sqliteObjectMock: jasmine.SpyObj<SQLiteObject> = jasmine.createSpyObj('SQLiteObject', ['executeSql']);
-    sqliteMock.create.and.resolveTo(sqliteObjectMock);
+    const executeSqlPromise: Promise<any> = Promise.resolve();
+    sqliteObjectMock.executeSql.and.returnValue(executeSqlPromise);
 
     await dbService.createDatabase();
 
@@ -102,6 +110,7 @@ describe('DbService', () => {
   });
 
   it('should validate a user', async () => {
+    const sqliteMock: jasmine.SpyObj<SQLite> = jasmine.createSpyObj('SQLite', ['create']);
     const executeSqlMock = jasmine.createSpy().and.returnValue(Promise.resolve({ rows: { item: (index: number) => ({ CANTIDAD: index }) } }));
     const sqliteObjectMock: jasmine.SpyObj<SQLiteObject> = jasmine.createSpyObj('SQLiteObject', ['executeSql']);
     sqliteObjectMock.executeSql.and.callFake(executeSqlMock);
@@ -117,6 +126,3 @@ describe('DbService', () => {
   });
 });
 
-function executeSqlMock(statement: string, params?: any[]): Promise<any> {
-  throw new Error('Function not implemented.');
-}

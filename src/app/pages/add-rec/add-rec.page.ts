@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 
 // Servicios
 import { RecordatorioService } from '../../services/recordatorio-service/recordatorio.service';
-import { DbService } from 'src/app/services/db-service/db.service';
 import { ApirestService } from 'src/app/services/apirest-service/apirest.service';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 // Native Storage
@@ -34,12 +33,10 @@ export class AddRecPage implements OnInit {
   medicamentosFiltrados: any[] = [];
   showSuggestions: boolean = false;
 
-
   @ViewChild('buscador') searchBar!: IonSearchbar;
-
   @ViewChild('popoverOptions', { static: false }) popoverOptions!: IonPopover;
 
-  constructor(private router: Router, private toastController: ToastController ,private alertController: AlertController,private recordatorioService: RecordatorioService, private dbService: DbService, private myPerfilService: MyPerfilService, private api: ApirestService,private nativeStorage: NativeStorage) { 
+  constructor(private router: Router, private toastController: ToastController ,private alertController: AlertController,private recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private api: ApirestService, private nativeStorage: NativeStorage) { 
   }
 
   ngOnInit() {
@@ -130,16 +127,6 @@ export class AddRecPage implements OnInit {
     this.mensajeHoras = 'Cada: ' + this.tiempoIngresado + ' hrs';
     this.mensajeDias = 'Duración estimada: ' + this.dias + ' días';
   }
-  // ALERTA CUANDO SE ACABE EL TEMPORIZADOR
-  enviarInformacionAlerta() {
-    const informacionAlerta = {
-      header: 'Notificación',
-      mensaje: 'Tomar: ' + this.nameMed
-    };
-    // Enviar la información de la alerta a través del servicio
-    this.recordatorioService.enviarAlerta(informacionAlerta);
-  }
-
   // OBTENER LOS OBJETOS CREADOS
   getPosts() {
     return this.api.getPosts().subscribe((res) => {
@@ -210,8 +197,6 @@ export class AddRecPage implements OnInit {
           recordatorio.id = ultimoObjeto.id + 1; // Incrementa el valor de id basado en el último objeto de la lista
         }
         lista.push(recordatorio);
-    
-        // recordatoriosPorUsuario[usuario].push(recordatorio); // Agrega el nuevo recordatorio a la lista
     
         this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
           console.log('Recordatorio guardado exitosamente');

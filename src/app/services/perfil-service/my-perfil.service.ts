@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DbService } from '../db-service/db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class MyPerfilService {
 
   usuario: string = '';
 
-  constructor(private dbService: DbService) { }
+  constructor() { }
 
   setUsuario(usuario: string) {
     this.usuario = usuario;
