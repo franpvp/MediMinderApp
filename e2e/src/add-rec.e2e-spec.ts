@@ -8,6 +8,9 @@ describe('Add-rec Page', () => {
         addRec = new AddRec();
         addRec.navigateToAddRecPage();
     });
+    it('Debería mostrar el título del formulario de Add-rec', () => {
+        expect(addRec.getTituloAddRec()).toBeTruthy();
+    })
 
     it('Debería tener contenido el input medicamento', () => {
         expect(addRec.getInputMedicamento()).toBeTruthy();
@@ -19,8 +22,11 @@ describe('Add-rec Page', () => {
         expect(addRec.getInputDias()).toBeTruthy();
     });
     it('El botón confirmar debería redireccionar al page Home', () => {
-        addRec.clickConfirmarButton();
+        addRec.clickAddConfirmarButton();
         expect(browser.getCurrentUrl()).toContain('/home');
     });
+    it('El botón agregar debería visualizarse en el page add-rec', () => {
+        expect(addRec.esVisibleAddConfirmarButton()).toBeTruthy();
+    })
     
 })

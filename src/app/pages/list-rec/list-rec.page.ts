@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // Servicios
 import { RecordatorioService } from '../../services/recordatorio-service/recordatorio.service';
-import { DbService } from '../../services/db-service/db.service';
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 // Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
@@ -15,7 +14,7 @@ export class ListRecPage implements OnInit {
 
   listaNativeStorage: any = [];
 
-  constructor(public recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private dbService: DbService, private nativeStorage: NativeStorage) {
+  constructor(public recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
 
   }
 
@@ -55,18 +54,5 @@ export class ListRecPage implements OnInit {
       console.log('ERROR AL OBTENER LA DATA: ', error);
     });
   }
-  
-  
-  
-  
-  
-  
-  
-
-
-
-  
-
-
   
 }

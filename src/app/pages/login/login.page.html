@@ -17,7 +17,7 @@
         <ion-list>
           <form #myForm="ngForm">
             <ion-card-header class="ion-text-center">
-              <ion-title class="titulo-login">Iniciar Sesión</ion-title>
+              <ion-title id="titulo-login" class="titulo-login">Iniciar Sesión</ion-title>
             </ion-card-header>
             <ion-item>
               <ion-row>
@@ -77,7 +77,7 @@
             </ion-row>
             <ion-row>
               <ion-col class="ion-text-center">
-                <div class="msgError" *ngIf="mostrarMensaje">
+                <div id="msg-error" class="msgError" *ngIf="mostrarMensaje">
                   Nombre de usuario o contraseña incorrectos.
                 </div>
               </ion-col>
@@ -85,7 +85,7 @@
             <ion-row>
               <ion-col>
                 <div class="ion-text-center">
-                  <ion-button [routerLink]="['/registro']" color="tertiary" shape="round" fill="outline">
+                  <ion-button id="btn-crear" [routerLink]="['/registro']" color="tertiary" shape="round" fill="outline">
                     Crear Cuenta
                   </ion-button>
                 </div>
@@ -93,7 +93,7 @@
             </ion-row>
             <ion-row>
               <ion-col class="ion-text-center">
-                <div class="spinner-container" *ngIf="showSpinner">
+                <div id="spinner" class="spinner-container" *ngIf="showSpinner">
                   <mat-spinner class="small-spinner"></mat-spinner>
                 </div>
               </ion-col>

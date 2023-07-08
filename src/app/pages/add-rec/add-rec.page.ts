@@ -63,7 +63,6 @@ export class AddRecPage implements OnInit {
         this.tiempoRestante = this.obtenerTiempoRestante(tiempoFinalizacion, ahora);
       } else {
         this.mostrarAlertaTermino();
-
         clearInterval(this.temporizador);
       }
       
@@ -210,7 +209,6 @@ export class AddRecPage implements OnInit {
           const ultimoObjeto = lista[lista.length - 1];
           recordatorio.id = ultimoObjeto.id + 1; // Incrementa el valor de id basado en el último objeto de la lista
         }
-  
         lista.push(recordatorio);
     
         // recordatoriosPorUsuario[usuario].push(recordatorio); // Agrega el nuevo recordatorio a la lista
@@ -248,9 +246,6 @@ export class AddRecPage implements OnInit {
       }
     });
   }
-
-
-  
 
   // Mensaje toast
   async presentToast(mensaje: string) {

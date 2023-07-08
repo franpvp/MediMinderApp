@@ -5,6 +5,9 @@ export class Registro {
     private getRegistroConfirmarButton(): ElementFinder {
         return element(by.id('btnIngresar'));
     }
+    getTituloRegistro(): ElementFinder {
+        return element(by.id('titulo-reg'));
+    }
     // Método que obtiene input de nombre usuario
     getInputUsuario(): ElementFinder {
         return element(by.id('usuario'));

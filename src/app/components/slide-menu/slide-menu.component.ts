@@ -36,7 +36,7 @@ export class SlideMenuComponent  implements OnInit {
     this.router.navigate(['/add-rec']);
   }
 
-  toRegistroRec() {
+  toListRec() {
     this.router.navigate(['/list-rec']);
   }
 

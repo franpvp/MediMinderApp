@@ -8,8 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { PerfilPage } from '../../pages/perfil/perfil.page';
+import { Router } from '@angular/router';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({

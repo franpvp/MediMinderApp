@@ -9,6 +9,10 @@ describe('Registro Page', () => {
         registroPage.navigateToRegistroPage();
     });
 
+    it('Debería mostrarse el título del formulario de registro', () => {
+        expect(registroPage.getTituloRegistro()).toBeTruthy();
+    })
+
     it('Debería tener contenido el input nombre de usuario', () => {
         expect(registroPage.getInputUsuario()).toBeTruthy();
     });

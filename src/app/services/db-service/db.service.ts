@@ -92,15 +92,12 @@ export class DbService {
           if (data.rows.item(0).CANTIDAD === 0){
             return false; // USUARIO NO EXISTE
           }
-          console.log('ESTOY EN EL SEGUNDO TRUE');
           return true;
           
         }).catch(e => {
-          console.log('ESTOY EN EL SEGUNDO TRUE - Error al ejecutar la consulta SQL: ', e);
           return true;
         })
     }).catch(e => {
-      console.log('ESTOY EN EL TERCER TRUE', e);
       return true;
     });
   }

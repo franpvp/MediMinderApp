@@ -99,7 +99,6 @@ export class LoginPage implements OnInit {
     })
   }
 
-
   resetearDiv() {
     this.mostrarMensaje = false;
   }
