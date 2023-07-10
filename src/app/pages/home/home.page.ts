@@ -11,7 +11,7 @@ export class HomePage implements OnInit{
   constructor(private menuController : MenuController) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
   }
 
   closeMenu() {

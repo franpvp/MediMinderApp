@@ -9,6 +9,7 @@ import { ApirestService } from 'src/app/services/apirest-service/apirest.service
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 // Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-add-rec',
@@ -36,7 +37,7 @@ export class AddRecPage implements OnInit {
   @ViewChild('buscador') searchBar!: IonSearchbar;
   @ViewChild('popoverOptions', { static: false }) popoverOptions!: IonPopover;
 
-  constructor(private router: Router, private toastController: ToastController ,private alertController: AlertController,private recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private api: ApirestService, private nativeStorage: NativeStorage) { 
+  constructor(private router: Router, private toastController: ToastController, private alertController: AlertController,private recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private api: ApirestService, private nativeStorage: NativeStorage) { 
   }
 
   ngOnInit() {
@@ -51,26 +52,39 @@ export class AddRecPage implements OnInit {
       clearInterval(this.temporizador);
     }
 
+    let contador = 0;
     const horaActual = new Date();
     const tiempoFinalizacion = new Date(horaActual.getTime() + this.tiempoIngresado * 60 * 60 * 1000);
+
+    let intervaloHoras = this.tiempoIngresado;
+    let duracionDias = this.dias;
+    let totalHoras = duracionDias * 24;
+    let totalRepeticiones = Math.ceil(totalHoras / intervaloHoras);
+    
 
     this.temporizador = setInterval(() => {
       const ahora = new Date();
       if (ahora < tiempoFinalizacion) {
         this.tiempoRestante = this.obtenerTiempoRestante(tiempoFinalizacion, ahora);
       } else {
-        this.mostrarAlertaTermino();
-        clearInterval(this.temporizador);
+        this.scheduleNotification();
+        contador++;
+
+        if(contador === totalRepeticiones) {
+          clearInterval(this.temporizador);
+          // SE INVOCAN LOS MÉTODOS
+          this.recordatorio();
+          this.mostrarAlerta().then(() => {
+            setTimeout(() => {
+              this.router.navigate(['/home']);
+            }, 1000);
+          });
+        } else {
+          tiempoFinalizacion.setTime(tiempoFinalizacion.getTime() + intervaloHoras * 60 * 60 * 1000);
+        }
       }
-      
     }, 1000);
-    // SE INVOCAN LOS MÉTODOS
-    this.recordatorio();
-    this.mostrarAlerta().then(() => {
-      setTimeout(() => {
-        this.router.navigate(['/home']);
-      }, 1000);
-    });
+    
   }
 
   async mostrarAlerta() {
@@ -99,20 +113,24 @@ export class AddRecPage implements OnInit {
     await alert.present();
   }
 
-  async mostrarAlertaTermino() {
-    const alerta = await this.alertController.create({
-      header: 'Notificación',
-      cssClass: 'multiline-alert',
-      inputs: [
+  //Método para ejecutar una Notificacion
+  async scheduleNotification() {
+    let options: ScheduleOptions = {
+      notifications: [
         {
-          type: 'text',
-          value: 'Tomar: ' + this.nameMed,
-          disabled: true
-        },
-      ],
-      buttons: ['OK']
-    });
-    await alerta.present();
+          id: 111,
+          title: "Notificación MediMinder",
+          body: "Explore new variety and offers",
+          largeBody: "Tomar " + this.nameMed
+        }
+      ]
+    }
+    try {
+      LocalNotifications.schedule(options);
+    }
+    catch(ex) {
+      alert(JSON.stringify(ex));
+    }
   }
 
   obtenerTiempoRestante(tiempoFinal: Date, tiempoActual: Date): string {

@@ -17,6 +17,11 @@ const config: CapacitorConfig = {
       SplashScreen: 'screen',
       SplashScreenDelay: '3000'
     }
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "iconColor": "#488AFF",
+    }
   }
 };
 

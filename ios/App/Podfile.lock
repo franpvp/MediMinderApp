@@ -12,6 +12,8 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (5.0.2):
     - Capacitor
+  - CapacitorLocalNotifications (5.0.5):
+    - Capacitor
   - CapacitorStatusBar (5.0.2):
     - Capacitor
   - CordovaPlugins (5.0.4):
@@ -25,6 +27,7 @@ DEPENDENCIES:
   - "CapacitorGeolocation (from `../../node_modules/@capacitor/geolocation`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorLocalNotifications (from `../../node_modules/@capacitor/local-notifications`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
 
@@ -43,6 +46,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorLocalNotifications:
+    :path: "../../node_modules/@capacitor/local-notifications"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
   CordovaPlugins:
@@ -56,9 +61,10 @@ SPEC CHECKSUMS:
   CapacitorGeolocation: 33015be1ef496585a60da9efa1c5642ff8624db3
   CapacitorHaptics: 864585542a435bd41eaabf7f30d9ff5ec03024d3
   CapacitorKeyboard: e628d4e66d621c69e449945ebabded17c5b9c2e8
+  CapacitorLocalNotifications: cb6a69d128c5ed2a7f22c897c393c0e380f680e7
   CapacitorStatusBar: 48f2899f6846cc7d8431b251ebfc58e1c10e3d58
   CordovaPlugins: ca4bf36b35f8271afa77e542811def36da43995d
 
-PODFILE CHECKSUM: e7b98fda0b410fa0944e1cfcc1d3939eca17f1f8
+PODFILE CHECKSUM: 7e85ab4fdce21d95d8db284d9fb247c45d6a6adf
 
 COCOAPODS: 1.12.1
