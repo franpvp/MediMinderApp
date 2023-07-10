@@ -19,12 +19,12 @@ describe('ApirestService', () => {
     httpMock.verify();
   });
 
-  it('should be created', () => {
+  it('Debería crearse el servicio apirest', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get posts', () => {
-    const dummyPosts = [{ id: 1, title: 'Post 1' }, { id: 2, title: 'Post 2' }];
+  it('Debería obtener los medicamentos', () => {
+    const dummyPosts = [{ id: 1, title: 'Med 1' }, { id: 2, title: 'Med 2' }];
 
     service.getPosts().subscribe((posts) => {
       expect(posts).toEqual(dummyPosts);
@@ -35,8 +35,8 @@ describe('ApirestService', () => {
     req.flush(dummyPosts);
   });
 
-  it('should get a post by id', () => {
-    const dummyPost = { id: 1, title: 'Post 1' };
+  it('Debería obtener un post por id', () => {
+    const dummyPost = { id: 1, title: 'Med 1' };
     const postId = 1;
 
     service.getPost(postId).subscribe((post) => {
@@ -48,8 +48,8 @@ describe('ApirestService', () => {
     req.flush(dummyPost);
   });
 
-  it('should create a post', () => {
-    const dummyPost = { title: 'New Post' };
+  it('Debería crear un post', () => {
+    const dummyPost = { title: 'New Med' };
 
     service.createPost(dummyPost).subscribe((response) => {
       expect(response).toBeTruthy();
@@ -61,8 +61,8 @@ describe('ApirestService', () => {
     req.flush({});
   });
 
-  it('should update a post', () => {
-    const dummyPost = { id: 1, title: 'Updated Post' };
+  it('Debería actualizar un post', () => {
+    const dummyPost = { id: 1, title: 'MedActualizado' };
     const postId = 1;
 
     service.updatePost(postId, dummyPost).subscribe((response) => {
@@ -75,7 +75,7 @@ describe('ApirestService', () => {
     req.flush({});
   });
 
-  it('should delete a post', () => {
+  it('Debería borrar un post', () => {
     const postId = 1;
 
     service.deletePost(postId).subscribe((response) => {
