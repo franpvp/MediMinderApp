@@ -1,3 +1,21 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ng-container *ngIf="isMenuEnabled()">
+    <ion-menu contentId="main-content">
+      <!-- Contenido del menú desplegable -->
+    </ion-menu>
+
+    <!-- Componente Slide Menu -->
+    <app-slide-menu></app-slide-menu>
+
+    <!-- Contenedor para el contenido de las páginas -->
+    <div class="ion-page" id="main-content">
+      <app-menu-bar></app-menu-bar>
+      <ion-content [fullscreen]="true">
+        <!-- Contenido de las páginas -->
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+  </ng-container>
+  
+  <ion-router-outlet *ngIf="!isMenuEnabled()"></ion-router-outlet>
 </ion-app>

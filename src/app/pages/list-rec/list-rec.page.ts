@@ -4,6 +4,9 @@ import { RecordatorioService } from '../../services/recordatorio-service/recorda
 import { MyPerfilService } from '../../services/perfil-service/my-perfil.service';
 // Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-list-rec',
@@ -13,13 +16,15 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 export class ListRecPage implements OnInit {
 
   listaNativeStorage: any = [];
+  estadoInfo: string;
 
-  constructor(public recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage) {
+  constructor(public recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private nativeStorage: NativeStorage, private route: ActivatedRoute, private navCtrl: NavController) {
 
   }
 
   ngOnInit() {
     this.obtenerDatos(this.myPerfilService.getUsuario());
+
   }
 
   // Método para obtener datos
@@ -54,5 +59,13 @@ export class ListRecPage implements OnInit {
       console.log('ERROR AL OBTENER LA DATA: ', error);
     });
   }
+  // Refresh
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+    }, 2000);
+  }
+
   
 }

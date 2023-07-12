@@ -5,25 +5,27 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding ion-text-center">
-    <ion-button (click)="toHome()" class="expanded-button">
-      Inicio
-      <ion-icon slot="start" name="home"></ion-icon>
-    </ion-button>
-    <ion-button (click)="toPerfil()" class="expanded-button">
-      Perfil
-      <ion-icon slot="start" name="person"></ion-icon>
-    </ion-button>
-    <ion-button (click)="toCrearRec()" class="expanded-button">
-      Crear Recordatorio
-      <ion-icon slot="start" name="create"></ion-icon>
-    </ion-button>
-    <ion-button (click)="toListRec()" class="expanded-button">
-      Recordatorios
-      <ion-icon slot="start" name="list"></ion-icon>
-    </ion-button>
-    <ion-button (click)="cerrarSesion()" class="expanded-button">
-      Cerrar Sesión
-      <ion-icon slot="start" name="log-out"></ion-icon>
-    </ion-button>
+    <ion-menu-toggle>
+      <ion-button (click)="toHome()" class="expanded-button">
+        Inicio
+        <ion-icon slot="start" name="home"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toPerfil()" class="expanded-button">
+        Perfil
+        <ion-icon slot="start" name="person"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toCrearRec()" class="expanded-button" color="success">
+        Crear Recordatorio
+        <ion-icon slot="start" name="create"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toListRec()" class="expanded-button">
+        Recordatorios
+        <ion-icon slot="start" name="list"></ion-icon>
+      </ion-button>
+      <ion-button (click)="cerrarSesion()" class="expanded-button" color="danger">
+        Cerrar Sesión
+        <ion-icon slot="start" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-menu-toggle>
   </ion-content>
 </ion-menu>

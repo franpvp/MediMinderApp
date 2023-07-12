@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonPopover, IonSearchbar, ToastController } from '@ionic/angular';
+import { AlertController, IonPopover, IonSearchbar, NavController, ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 
 // Servicios
@@ -10,6 +10,8 @@ import { MyPerfilService } from '../../services/perfil-service/my-perfil.service
 // Native Storage
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
+
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-add-rec',
@@ -33,11 +35,12 @@ export class AddRecPage implements OnInit {
   medicamentos: any[] = [];
   medicamentosFiltrados: any[] = [];
   showSuggestions: boolean = false;
+  estadoInfo: string = '';
 
   @ViewChild('buscador') searchBar!: IonSearchbar;
   @ViewChild('popoverOptions', { static: false }) popoverOptions!: IonPopover;
 
-  constructor(private router: Router, private toastController: ToastController, private alertController: AlertController,private recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private api: ApirestService, private nativeStorage: NativeStorage) { 
+  constructor(private router: Router, private changeDetectorRef: ChangeDetectorRef, private toastController: ToastController, private alertController: AlertController,private recordatorioService: RecordatorioService, private myPerfilService: MyPerfilService, private api: ApirestService, private nativeStorage: NativeStorage, private navCtrl: NavController) { 
   }
 
   ngOnInit() {
@@ -60,7 +63,8 @@ export class AddRecPage implements OnInit {
     let duracionDias = this.dias;
     let totalHoras = duracionDias * 24;
     let totalRepeticiones = Math.ceil(totalHoras / intervaloHoras);
-    
+
+    this.estadoInfo = 'En curso';
 
     this.temporizador = setInterval(() => {
       const ahora = new Date();
@@ -69,22 +73,36 @@ export class AddRecPage implements OnInit {
       } else {
         this.scheduleNotification();
         contador++;
-
         if(contador === totalRepeticiones) {
+          this.nativeStorage.getItem('recordatoriosPorUsuario').then((data) => {
+            this.estadoInfo = 'Finalizado';
+            const usuario = this.myPerfilService.getUsuario();
+            data[usuario].forEach((recordatorio: any) => {
+              recordatorio.estadoInfo = this.estadoInfo;
+            });
+            this.nativeStorage.setItem('recordatoriosPorUsuario', data)
+              .then(() => {
+                this.changeDetectorRef.detectChanges();
+                console.log('Estado "Finalizado" guardado en NativeStorage');
+              })
+              .catch((error) => {
+                console.error('Error al guardar el estado "Finalizado" en NativeStorage:', error);
+              });
+          })
+          
+          
           clearInterval(this.temporizador);
-          // SE INVOCAN LOS MÉTODOS
-          this.recordatorio();
-          this.mostrarAlerta().then(() => {
-            setTimeout(() => {
-              this.router.navigate(['/home']);
-            }, 1000);
-          });
         } else {
           tiempoFinalizacion.setTime(tiempoFinalizacion.getTime() + intervaloHoras * 60 * 60 * 1000);
         }
       }
     }, 1000);
-    
+    this.recordatorio();
+    this.mostrarAlerta().then(() => {
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 1000);
+    });
   }
 
   async mostrarAlerta() {
@@ -94,7 +112,7 @@ export class AddRecPage implements OnInit {
       inputs: [
         {
           type: 'text',
-          value: this.nameMed,
+          value: this.mensajeMed,
           disabled: true
         },
         {
@@ -120,8 +138,8 @@ export class AddRecPage implements OnInit {
         {
           id: 111,
           title: "Notificación MediMinder",
-          body: "Explore new variety and offers",
-          largeBody: "Tomar " + this.nameMed
+          body: "Click para más información",
+          largeBody: "Tomar: " + this.nameMed
         }
       ]
     }
@@ -200,7 +218,8 @@ export class AddRecPage implements OnInit {
           id: 1,
           nombreMed: nombreMedIng,
           tiempoIng: String(tiempoIng),
-          dias: String(diasIng)
+          dias: String(diasIng),
+          estadoInfo: 'En curso'
         };
         let recordatoriosPorUsuario = data || {}; // Si no hay datos, crea un objeto vacío
         const usuario = this.myPerfilService.getUsuario();
@@ -217,6 +236,7 @@ export class AddRecPage implements OnInit {
         lista.push(recordatorio);
     
         this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
+          this.changeDetectorRef.detectChanges();
           console.log('Recordatorio guardado exitosamente');
         }).catch((error) => {
           console.log('Error al guardar el recordatorio: ', error);
@@ -233,13 +253,15 @@ export class AddRecPage implements OnInit {
           id: 1,
           nombreMed: nombreMedIng,
           tiempoIng: String(tiempoIng),
-          dias: String(diasIng)
+          dias: String(diasIng),
+          estadoInfo: this.estadoInfo
         };
         let recordatoriosPorUsuario = {
           [usuario]: [recordatorio]
         };
         // Guarda la lista en NativeStorage
         this.nativeStorage.setItem('recordatoriosPorUsuario', recordatoriosPorUsuario).then(() => {
+          this.changeDetectorRef.detectChanges();
           console.log('Datos guardados exitosamente');
         }).catch((error) => {
           console.log('Error al guardar los datos: ', error);
@@ -250,6 +272,7 @@ export class AddRecPage implements OnInit {
     });
   }
 
+
   // Mensaje toast
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
@@ -259,5 +282,7 @@ export class AddRecPage implements OnInit {
     });
     toast.present();
   }
+
+
   
 }

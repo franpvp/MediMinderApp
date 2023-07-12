@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -40,7 +40,6 @@ export class MenuBarComponent  implements OnInit {
 
   @ViewChild(MatMenuTrigger)
   trigger!: MatMenuTrigger;
-
 
   toHome() {
     this.router.navigate(['/home']);

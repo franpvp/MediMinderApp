@@ -20,6 +20,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgFor, AsyncPipe} from '@angular/common';
 
+import { MenuBarComponent } from "./components/menu-bar/menu-bar.component";
+import { SlideMenuComponent } from "./components/slide-menu/slide-menu.component";
+
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import {NgFor, AsyncPipe} from '@angular/common';
         MatInputModule,
         MatFormFieldModule,
         NgFor,
-        AsyncPipe
+        AsyncPipe,
+        MenuBarComponent,
+        SlideMenuComponent
     ]
 })
 export class AppModule {}
